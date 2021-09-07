@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
 from django.db.models import fields
-from main.models import Profile
+from main.models import Comment, Profile
 from main.models import Post
 
 class RegisterForm(UserCreationForm):
@@ -31,3 +31,7 @@ class PostCreateView(forms.ModelForm):
     class Meta:
         model = Post
         fields = ["title","body"]
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']

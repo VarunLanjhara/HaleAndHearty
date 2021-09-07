@@ -1,12 +1,12 @@
 from django.conf.urls import url
 from django.urls.base import reverse_lazy
-from main.forms import RegisterForm
+from main.forms import CommentForm, RegisterForm
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView,PasswordResetConfirmView,PasswordResetCompleteView
-from main.models import Contact,Profile
+from main.models import Comment, Contact,Profile
 from main.forms import ProfileUpdateForm,UserUpdateForm,PostCreateView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -145,14 +145,41 @@ class PostListView(ListView):
         contact.save()
         return redirect("/")
 
-class PostDetailview(DetailView):
-    model = Post
-    queryset = Post.objects.all()
-    template_name = "post_detail.html"
+class PostDetailview(View):
+    def get(self,request,pk,*args,**kwargs):
+        post = Post.objects.get(pk=pk)
+        form = CommentForm()
 
-    # def get_object(self):
-    #     title = self.kwargs.get("title")
-    #     return get_object_or_404(Post,title = title)
+        comments = Comment.objects.filter(post=post).order_by('-commented')
+
+        context = {
+            "form":form,
+            "post":post,
+            'comments':comments
+        }
+
+        return render(request,"post_detail.html",context)
+
+    def post(self,request,pk,*args,**kwargs):
+        post = Post.objects.get(pk=pk)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.user = request.user
+            new_comment.post = post
+            new_comment.save()
+            return redirect(f"/posts/{post.pk}")
+
+        comments = Comment.objects.filter(post=post).order_by('-commented')
+
+        context = {
+            "form":form,
+            "post":post,
+            'comments':comments
+        }
+
+        return render(request,"post_detail.html",context)
+
 
     # def post(self,request):
     #     comment = request.POST.get("comment")
