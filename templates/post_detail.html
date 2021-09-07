@@ -192,8 +192,8 @@
         <div class="bodystuff">
             {{post.body|safe}}
         </div>
-        <div class="bottom-stuff" onclick="openasnwerpanel()">
-            <div class="answer-field">
+        <div class="bottom-stuff">
+            <div class="answer-field" onclick="openasnwerpanel()">
                 <i class="far fa-edit"></i>
                 <span class="answer">Answer</span>
             </div>
@@ -230,8 +230,10 @@
               <button type="submit">Answer</button>
           </div>
       </form>
-      <hr>
-  </div>
+    </div>
+    <hr width="572px" style="position: relative;left: 340px;">
+    <p style="color: #282829;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;font-size: 15px;font-weight: bold;line-height: 21px;margin-left: 340px;">{{numberofcomments}} Answers</p>
+    <hr width="572px" style="position: relative;left: 340px;">
 
   {% for comment in comments %}
     <div class="postanswersdiv">

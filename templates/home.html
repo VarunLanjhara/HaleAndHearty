@@ -175,10 +175,12 @@
                     <hr class="laststuffunder">
                 </div>
                 <div class="bottom-stuff">
-                    <div class="answer-field">
-                        <i class="far fa-edit"></i>
-                        <span class="answer">Answer</span>
-                    </div>
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <div class="answer-field">
+                            <i class="far fa-edit"></i>
+                            <span class="answer">Answer</span>
+                        </div>
+                    </a>
                     <a>
                         <div class="save-field">
                             <i class="far fa-save"></i>
@@ -200,6 +202,21 @@
           </div>
         {% endif %}
       {% endfor %}
+
+      <div class="postcommentdiv" id = "postcommentdiv">
+        <form action="" method="post">
+            <div class="userdiv">
+                <img src="{{request.user.profile.image.url}}" alt="">
+                <p>{{request.user}}</p>
+            </div>
+            {% csrf_token %}
+            {{form.media}}
+            {{form}}
+            <div class="buttonstuffhere">
+                <button type="submit">Answer</button>
+            </div>
+        </form>
+      </div>
 
       <div class="modal fade" id="modalofreport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">

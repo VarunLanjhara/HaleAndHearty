@@ -60,32 +60,32 @@ def registerUser(request):
             register = RegisterForm()
         return render(request,"register.html",{"register":register})
 
-def home(request,id,slug):
-    if request.method == "POST":
-        name = request.POST["name"]
-        email = request.POST["email"]
-        message = request.POST["message"]
-        contact = Contact(name=name,email=email,message=message)
-        contact.save()
-    else:
-        profile = Profile.objects.all()
-        followers = profile.followers.all()
-        numberoffollowers = len(followers)
-        for follower in followers:
-            if follower == request.user:
-                isfollowing = True
-            else:
-                isfollowing = False
-        post = get_object_or_404(Post,id = id,slug = slug)
-        if post.save.filer(id = request.user.id).exists():
-            issave = True;
-        context = {
-            "numberoffollowers":numberoffollowers,
-            "followers":followers,
-            "isfollowing":isfollowing,
-            "issave":issave
-        }
-        return render(request,"home.html",context)
+# def home(request,id,slug):
+#     if request.method == "POST":
+#         name = request.POST["name"]
+#         email = request.POST["email"]
+#         message = request.POST["message"]
+#         contact = Contact(name=name,email=email,message=message)
+#         contact.save()
+#     else:
+#         profile = Profile.objects.all()
+#         followers = profile.followers.all()
+#         numberoffollowers = len(followers)
+#         for follower in followers:
+#             if follower == request.user:
+#                 isfollowing = True
+#             else:
+#                 isfollowing = False
+#         post = get_object_or_404(Post,id = id,slug = slug)
+#         if post.save.filer(id = request.user.id).exists():
+#             issave = True;
+#         context = {
+#             "numberoffollowers":numberoffollowers,
+#             "followers":followers,
+#             "isfollowing":isfollowing,
+#             "issave":issave
+#         }
+#         return render(request,"home.html",context)
 
 # def save_post(self,request,pk):
 #     post = Post.objects.get(pk = pk)
@@ -131,11 +131,14 @@ class Profilee(DetailView,LoginRequiredMixin):
         username = self.kwargs.get("username")
         return get_object_or_404(User,username = username)
 
-class PostListView(ListView):
-    model = Post
-    template_name = "home.html"
-    context_object_name = "posts"
-    ordering = ['-created'] 
+class PostListView(View):
+    def get(self,request,*args,**kwargs):
+        posts = Post.objects.all()
+        posts.order_by("-created")
+        context = {
+            "posts":posts
+        }
+        return render(request,"home.html",context)
 
     def post(self,request):
         name = request.POST.get("name")
@@ -149,13 +152,16 @@ class PostDetailview(View):
     def get(self,request,pk,*args,**kwargs):
         post = Post.objects.get(pk=pk)
         form = CommentForm()
+        commentss = Comment.objects.filter(post=post)
+        numberofcomments = len(commentss)
 
         comments = Comment.objects.filter(post=post).order_by('-commented')
 
         context = {
             "form":form,
             "post":post,
-            'comments':comments
+            'comments':comments,
+            'numberofcomments':numberofcomments
         }
 
         return render(request,"post_detail.html",context)
@@ -169,13 +175,16 @@ class PostDetailview(View):
             new_comment.post = post
             new_comment.save()
             return redirect(f"/posts/{post.pk}")
+        commentss = Comment.objects.all()
+        numberofcomments = len(commentss)
 
         comments = Comment.objects.filter(post=post).order_by('-commented')
 
         context = {
             "form":form,
             "post":post,
-            'comments':comments
+            'comments':comments,
+            'numberofcomments':numberofcomments
         }
 
         return render(request,"post_detail.html",context)
