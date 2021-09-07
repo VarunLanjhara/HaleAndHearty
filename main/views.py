@@ -122,14 +122,34 @@ def update_profile(request):
 class PasswordResetVieww(PasswordResetView):
     template_name = "reset/password_reset.html"
 
-class Profilee(DetailView,LoginRequiredMixin):
-    login_url = "/login"
-    template_name = "profile.html"
-    queryset = User.objects.all()
+class Profilee(View,LoginRequiredMixin):
+    def get(self,request,pk):
+        profile = Profile.objects.get(pk=pk)
+        user = profile.user
+        posts = Post.objects.filter(author=user).order_by('-created')
+        followers = profile.followers.all()
+        number_of_followers = len(followers)
+        if len(followers) == 0:
+            is_following = False
+        for follower in followers:
+            if follower == request.user:
+                is_following = True
+                break
+            else:
+                is_following = False
 
-    def get_object(self):
-        username = self.kwargs.get("username")
-        return get_object_or_404(User,username = username)
+        context = {
+            "profile":profile,
+            'user':user, 
+            'posts':posts,
+            'number_of_followers': number_of_followers,
+            'is_following': is_following,
+        }
+        return render(request,"profile.html",context)
+
+    # def get_object(self):
+    #     username = self.kwargs.get("username")
+    #     return get_object_or_404(User,username = username)
 
 class PostListView(View):
     def get(self,request,*args,**kwargs):
@@ -248,23 +268,16 @@ class PostDeleteView(DeleteView,UserPassesTestMixin,LoginRequiredMixin):
     # def get_object(self):
     #     title = self.kwargs.get("title")
     #     return get_object_or_404(Post,title = title)
-
-class AddFollowers(View,LoginRequiredMixin):
-    def post(self,request,pk):
+class AddFollower(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.add(request.user)
-        return redirect("/")
 
-    # def get_object(self):
-    #     username = self.kwargs.get("username")
-    #     return get_object_or_404(User,username = username)
+        return redirect('profile', pk=profile.pk)
 
-class RemoveFollowers(View,LoginRequiredMixin):
-    def post(self,request,pk):
+class RemoveFollower(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.remove(request.user)
-        return redirect("/")
 
-    # def get_object(self):
-    #     username = self.kwargs.get("username")
-    #     return get_object_or_404(User,username = username)
+        return redirect('profile', pk=profile.pk)

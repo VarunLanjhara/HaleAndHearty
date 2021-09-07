@@ -33,7 +33,7 @@
             <img src="{{request.user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
             <i class="fas fa-angle-down" onclick="usernav()"></i>
             <div class="divofuserthings" id = "navbar-user">
-                <a href="{% url 'profile' user.profile %}" target="_blank" onclick="usernav()">
+                <a href="{% url 'profile' user.pk %}" target="_blank" onclick="usernav()">
                     <div class="upperpart">
                         <img src="{{request.user.profile.image.url}}" alt="">
                         <h3>{{request.user}}</h3>
@@ -114,6 +114,18 @@
             <div class="profilestuff">
             <img src="{{user.profile.image.url}}" alt="" data-bs-toggle="tooltip" title = "{{user.profile}}">
             <h4>{{user.profile}}</h4>
+            {% if is_following %}
+            <form action="{% url 'remove_followers' profile.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit">UnFollow</button>
+            </form>
+            {% else %}
+                <form action="{% url 'add_followers' profile.pk %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Follow</button>
+                </form>
+            {% endif %}
+            <h1>Followers : {{number_of_followers}}</h1>
             </div>
             <p class="description">{{user.profile.about}}</p>
             <i class="fas fa-share sharebutton" data-bs-toggle="modal" data-bs-target="#sharemodel"></i>
