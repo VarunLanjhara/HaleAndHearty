@@ -1,0 +1,1058 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap');
+
+.navbarr{
+    height: 50px;
+    width: 100%;
+    background-color: #fafafb;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5050;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+a{
+    color: #282829;
+    text-decoration: none;
+}
+
+.things ul{
+    display: flex;
+}
+
+.things ul li{
+    list-style: none;
+    height: 25px;
+    margin-top: 17px;
+    cursor: pointer;
+}
+
+.things ul li a{
+    color: #535a60;
+    text-decoration: none;
+    margin: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+}
+
+.things ul li:hover{
+    background-color: #535a602f;
+    border-radius: 200px;
+}
+
+.things ul li a:hover{
+    color: black;
+}
+
+.searchdiv{
+    display: flex;
+    align-items: center;
+    width: 550px;
+    height: 34px;
+    outline: none;
+    border: 1px solid #535a604d;
+    background-color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.searchdiv i{
+    color: #535a604d;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.searchh{
+    flex: 1;
+    border: none;
+    outline: none;
+    height: 31px;
+    padding-left: 9px;
+    font-size: 15px;
+}
+
+.searchh::placeholder{
+    color: #535a609a;
+    font-size: 12px;
+}
+
+.logbutton{
+    border: transparent;
+    background-color: #0095ff;
+    color: #39739d;
+    height: 35px;
+    width: 75px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 0 solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+    outline: 1px solid;
+    outline-color: rgba(255, 255, 255, .5);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.regbutton{
+    border: transparent;
+    background-color: #0095ff;
+    color: #39739d;
+    height: 35px;
+    width: 75px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: 1px solid rgba(255, 255, 255, .5);
+    border: 0 solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+    outline: 1px solid;
+    outline-color: rgba(255, 255, 255, .5);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.contact{
+    color: #535a60 !important;
+}
+
+.contact:hover{
+    color: black !important;
+}
+
+.loglink{
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    font-weight: 500;
+}
+
+.reglink{
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    font-weight: 500;
+}
+
+.loglink:hover{
+    color: white !important;
+}
+
+.reglink:hover{
+    color: white !important;
+}
+
+.logbutton:hover{
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388;
+}
+
+.regbutton:hover{
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388;
+}
+
+.modal-divbruh{
+    margin-top: 50px;   
+}
+
+.modalbtn{
+    background-color: #0095ff;
+    height: 35px;
+    width: 75px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white !important;
+    border: transparent;
+    opacity: 1;
+}
+
+.modalbtn:disabled{
+    opacity: 0.65;
+    cursor: no-drop;
+}
+
+.divofshit{
+    padding: 0;
+}
+
+.fa-times{
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.form-check-input{
+    position: relative;
+    left: 20px; 
+    cursor: pointer;
+}
+
+.fa-bars{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.barstuff{
+    display: none;
+}
+
+.collapse{
+    margin-top: 50px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    height: 100px;
+}
+
+.navbar-dropdownshit{
+    background-color: white;
+    width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    height: 170px;
+    position: fixed;
+    bottom: 62%;
+    right: 2%;
+    display: none;
+    transform: translateZ(100px);
+    transition: all 0.3s ease-in;
+}
+
+/* navbaar dropdown of user authenticated  */
+
+@keyframes slideIn {
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0rem);
+      opacity: 1;
+    }
+  
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  }
+
+.divofuserthings{
+    background-color: white;
+    width: 230px;
+    height: 400px;
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    display: none;
+    opacity: 1;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+}
+
+.divofuserthings .upperpart{
+    height: 100px;
+    cursor: pointer;
+    
+}
+
+.divofuserthings .upperpart:hover{
+    opacity: 0.8;
+}
+
+.divofuserthings .upperpart img{
+    width: 35px;
+    height: 35px;
+    border-width: 1px;
+    border-radius: 100%;
+    position: relative;
+    top: 16px;
+    left: 10px;
+}
+
+.divofuserthings .upperpart h3{
+    font-weight: bold;
+    line-height: 1.4;
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #282829;
+    position: relative;
+    top: 20px;
+    left: 10px;
+    width: 100px;
+}
+
+.divofuserthings a{
+    text-decoration: none;
+}
+
+.divofuserthings .upperpart hr{
+    color: #7e7e7e;
+    margin-top: 40px;
+}
+
+.divofuserthings .upperpart i{
+    position: absolute;
+    left: 200px;
+    color: grey;
+    top: 60px;
+}
+
+
+.divofuserthings .middlepart .askquestions{
+    display: flex;
+    margin-top: 5px;
+    cursor: pointer;
+    height: 40px;
+}
+
+.divofuserthings .middlepart .askquestions:hover{
+    background-color: #94949434;
+}
+
+.divofuserthings .middlepart .askquestions i{
+    margin-top: 10px;
+    margin-left: 4px;
+}
+
+.divofuserthings .middlepart .askquestions p{
+    margin-left: 20px;
+    margin-top: 8px;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.divofuserthings .middlepart .coinsthing{
+    display: flex;
+    cursor: pointer;
+    height: 40px;
+}
+
+.divofuserthings .middlepart .coinsthing:hover{
+    background-color: #94949434;
+}
+
+.divofuserthings .middlepart .coinsthing i{
+    margin-top: 10px;
+    margin-left: 4px;
+}
+
+.divofuserthings .middlepart .coinsthing p{
+    margin-left: 20px;
+    margin-top: 8px;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.divofuserthings .middlepart .yourcontent{
+    display: flex;
+    cursor: pointer;
+    height: 40px;
+}
+
+.divofuserthings .middlepart .yourcontent:hover{
+    background-color: #94949434;
+}
+
+.divofuserthings .middlepart .yourcontent i{
+    margin-top: 10px;
+    margin-left: 4px;
+}
+
+.divofuserthings .middlepart .yourcontent p{
+    margin-left: 20px;
+    margin-top: 8px;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.divofuserthings .middlepart .leaderboard{
+    display: flex;
+    cursor: pointer;
+    height: 40px;
+}
+
+.divofuserthings .middlepart .leaderboard:hover{
+    background-color: #94949434;
+}
+
+.divofuserthings .middlepart .leaderboard i{
+    margin-top: 10px;
+    margin-left: 4px;
+}
+
+.divofuserthings .middlepart .leaderboard p{
+    margin-left: 20px;
+    margin-top: 8px;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.divofuserthings .middlepart hr{
+    color: #7e7e7e;
+    margin-top: 10px;
+}
+
+.divofuserthings .lastpart{
+    position: relative;
+    bottom: 13px;
+}
+
+.divofuserthings .lastpart .contact{
+    cursor: pointer;
+}
+
+.divofuserthings .lastpart .contact:hover{
+    background-color: #94949434;
+}
+
+.divofuserthings .lastpart .contact p{
+    color: #282829;
+    font-size: 14px;
+    margin-bottom: 0;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.divofuserthings .lastpart .about{
+    cursor: pointer;
+}
+
+.divofuserthings .lastpart .about:hover{
+    background-color: #94949434;
+}
+
+.divofuserthings .lastpart .about p{
+    color: #282829;
+    margin-bottom: 0;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.divofuserthings .lastpart .logout{
+    cursor: pointer;
+}
+
+.divofuserthings .lastpart .logout:hover{
+    background-color: #94949434;
+}
+
+.divofuserthings .lastpart .logout a{
+    text-decoration: none;
+    color: #282829;
+}
+
+.divofuserthings .lastpart .logout p{
+    color: #282829;
+    font-size: 14px;
+    height: 30px;
+    margin-bottom: 0;
+    line-height: 30px;
+    margin-left: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.divofuserthings .lastpart .help{
+    cursor: pointer;
+}
+
+.divofuserthings .lastpart .help:hover{
+    background-color: #94949434;
+}
+
+.divofuserthings .lastpart .help p{
+    color: #282829;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 0;
+    margin-left: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* navbar dropdown inside stuuf */
+
+.iamlinkbruh{
+    text-decoration: none;
+}
+
+.contact-navbarhaha{
+    display: flex;
+    height: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+.contact-navbarhaha i{
+    margin-top: 4px;
+    margin-left: 20px;
+}
+
+.contact-navbarhaha p{
+    margin-left: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.contact-navbarhaha:hover{
+    background-color: #0079d3;
+    color: white;
+}
+
+.about-navbarhaha{
+    display: flex;
+    height: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+.about-navbarhaha i{
+    margin-top: 4px;
+    margin-left: 20px;
+}
+
+.about-navbarhaha p{
+    margin-left: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.about-navbarhaha:hover{
+    background-color: #0079d3;
+    color: white;
+}
+
+.signin-navbarhaha{
+    display: flex;
+    height: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+.signin-navbarhaha i{
+    margin-top: 4px;
+    margin-left: 20px;
+}
+
+.signin-navbarhaha p{
+    margin-left: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.signin-navbarhaha:hover{
+    background-color: #0079d3;
+    color: white;
+}
+
+.signup-navbarhaha{
+    display: flex;
+    height: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+.signup-navbarhaha i{
+    margin-top: 4px;
+    margin-left: 20px;
+}
+
+.signup-navbarhaha p{
+    margin-left: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.signup-navbarhaha:hover{
+    background-color: #0079d3;
+    color: white;
+}
+
+.modalshare{
+    margin-top: 100px;
+}
+
+/* logged in user stuff */
+
+.iconsdivuser i{
+    font-size: 17px;
+    color: #838c95;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 34px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.userdiv i{
+    cursor: pointer;
+    position: relative;
+    left: 5px;
+    top: 2px;
+}
+
+.userprofilebruh{
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.sr-only{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.iconsdivuser i:hover{
+    color: black;
+    background-color: #e3e6e8;
+}
+
+.modalbodystuff a{
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    color: white;
+    margin-left: 70px;
+}
+
+.modalbodystuff a:hover{
+    color: white;
+}
+
+.modalbodystuff .facebook-this{
+    width: 300px;
+    height: 40px;
+    background-color: #4267b2;
+    line-height: 40px;
+    margin-left: 94px;
+    margin-bottom: 10px;
+}
+
+.modalbodystuff .whatsapp-this{
+    width: 300px;
+    height: 40px;
+    background-color: #25d366;
+    line-height: 40px;
+    margin-left: 94px;
+    margin-bottom: 10px;
+}
+
+.modalbodystuff .reddit-this{
+    width: 300px;
+    height: 40px;
+    background-color: #ff4500;
+    line-height: 40px;
+    margin-left: 94px;
+    margin-bottom: 10px;
+}
+
+.userprofilestuff{
+    width: 50%;
+    position: relative;
+    top: 80px;
+    left: 200px;
+}
+
+.userprofilestuff .profilestuff{
+    display: flex;
+}
+
+.userprofilestuff .profilestuff h4{
+    font-weight: bold;
+    font-size: 27px;
+    color: #282829;
+    height: 37px;
+    line-height: 37px;
+    position: relative;
+    left: 20px;
+    top: 30px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.userprofilestuff img{
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+}
+
+.userprofilestuff .description{
+    font-size: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #282829;
+    line-height: 21px;
+    position: relative;
+    top: 10px;
+}
+
+
+.userprofilestuff hr{
+    background-color: grey;
+}
+
+.userprofilestuff .fa-share{
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    color: #282829;
+    left: 610px;
+    bottom: 130px;
+}
+
+.userprofilestuff .sidebarstuff{
+    background-color: white;
+    /* box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px; */
+    border: 1px solid #ccc;
+    height: 60px;
+    width: 300px;
+    position: relative;
+    bottom: 250px;
+    left: 800px;
+}
+
+.userprofilestuff .sidebarstuff .fa-plus{
+    color: #2e69ff;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 21px;
+    position: relative;
+    left: 130px;
+}
+
+.userprofilestuff .sidebarstuff h4{
+    text-align: center;
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.userprofilestuff .sidebarstuff2{
+    background-color: white;
+    /* box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px; */
+    border: 1px solid #ccc;
+    height: 60px;
+    width: 300px;
+    position: relative;
+    bottom: 150px;
+    left: 800px;
+}
+
+.userprofilestuff .sidebarstuff2 .fa-plus{
+    color: #2e69ff;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 21px;
+    position: relative;
+    left: 130px;
+}
+
+.userprofilestuff .sidebarstuff2 h4{
+    text-align: center;
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.userprofilestuff .stuff{
+    display: flex;
+    justify-content: space-around;
+}
+
+.userprofilestuff .stuff .profile{
+    color: #282829;
+}
+
+.userprofilestuff .stuff .profile:hover{
+    background-color: transparent;
+}
+
+.userprofilestuff .stuffunder{
+    position: relative;
+    bottom: 30px;
+}
+
+.fa-user-edit{
+    cursor: pointer;
+    position: relative;
+    left: 600px;
+    bottom: 35px;
+    font-size: 16px;
+}
+
+.userprofilestuff .stuff a{
+    color: #939598;
+    text-decoration: none;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 50px;
+    font-weight: 500;
+    height: 50px;
+    position: relative;
+    bottom: 15px;
+}
+
+.userprofilestuff .stuff a:hover{
+    color: #282829;
+    background-color: #9395983a;
+}
+
+.fa-calendar-day{
+    position: relative;
+    top: 20px;
+    right: 20px;
+    background-color: #f1f2f2;
+    font-size: 13px;
+}
+
+.joinedthign{
+    position: relative;
+    left: 20px;
+    font-size: 13px;
+}
+
+.updateprofilestuff{
+    width: 390px;
+    height: 650px;
+    /* background-color: white; */
+    margin: 0 auto;
+    /* box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;  */
+    border-radius: 1px;
+    align-items: center;
+    margin-top: 70px;
+    justify-content: center;
+}
+
+.updateprofilestuff .btnofupdateprofile{
+    height: 30px;
+    width: 250px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    background-color: rgb(0, 148, 246);
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+}
+.updateprofilestuff small{
+    display: none;
+}
+
+.userediticon{
+    color: black;
+}
+
+.userediticon:hover{
+    color: black;
+}
+
+.downspaceok{
+    height: 130px;
+    width: 30px;
+}
+
+.updateprofilestuff h2{
+    color: black;
+    height: 40px;
+    width: 175px;
+    font-size: 28px;
+    font-weight: 600;
+    white-space: nowrap;
+    font-family: Inconsolata;
+    text-indent: 20%;
+    margin-bottom: 20px;
+}
+
+@media (max-width : 1300px){
+    .userprofilestuff .sidebarstuff{
+        display: none;
+    }
+    .userprofilestuff .sidebarstuff2{
+        display: none;
+    }
+}
+
+@media (max-width : 1160px){
+    .barstuff{
+        display: block;
+    }
+    .authstuff{
+        display: none;
+    }
+    .things{
+        display: none;
+    }
+    .iconsdivuser i{
+        font-size: 17px;
+    }
+}
+
+
+@media (max-width : 1025px){
+    .userprofilestuff .fa-share{
+        position: relative;
+        left: 400px;
+    }
+}
+
+@media (max-width:876px){
+    .iconsdivuser i{
+        width: 14px;
+    }
+
+    .searchdiv{
+        width: 300px;
+        height: 34px;
+
+    }
+
+    .userprofilestuff .fa-user-edit{
+        position: relative;
+        left: 400px;
+    }
+}
+
+@media (max-width : 660px){
+    .searchdiv{
+        width: 190px;
+        height: 34px;
+    }
+    .searchh{
+        width: 100px;
+    }
+    .navbar-dropdownshit{
+        bottom: 68%;
+    }
+    .iconsdivuser i{
+        font-size: 14px;
+    }
+    .userprofilestuff .fa-share{
+        position: relative;
+        bottom: 250px;
+    }
+
+    .userprofilestuff .fa-user-edit{
+        position: relative;
+        left: 200px;
+    }
+    .userprofilestuff .fa-share{
+        position: relative;
+        left: 200px;
+        bottom: 200px;
+    }
+}
+
+@media (max-width:516px){
+    .userprofilestuff .fa-share{
+        position: relative;
+        left: 100px;
+        bottom: 130px;
+    }
+    .userprofilestuff .fa-calendar-day{
+        position: relative;
+        right: 170px;
+    }
+    .userprofilestuff .joinedthign{
+        position: relative;
+        left: -130px;
+    }
+    .userprofilestuff .fa-user-edit{
+        position: relative;
+        left: 100px;
+    }
+    .userprofilestuff .profilestuff{
+        position: relative;
+        right: 150px;
+    }
+    .userprofilestuff .description{
+        position: relative;
+        right: 150px;
+        width: 250px;
+    }
+    .userprofilestuff .stuff{
+        position: relative;
+        right: 180px;
+    }
+    .userprofilestuff .underprofilestuff{
+        position: relative;
+        right: 180px;
+        width: 300px;
+    }
+    .userprofilestuff .stuffunder{
+        position: relative;
+        right: 180px;
+        width: 300px;
+    }
+    .userprofilestuff .stuff{
+        width: 300px;
+    }
+    .userprofilestuff .stuff a{
+        font-size: 11px;
+    }
+    .modalbodystuff .facebook-this{
+        width: 200px;
+    }
+    .modalbodystuff .facebook-this a{
+        margin-left: 40px;
+    }
+    .modalbodystuff .whatsapp-this{
+        width: 200px;
+    }
+    .modalbodystuff .whatsapp-this a{
+        margin-left: 40px;
+    }
+    .modalbodystuff .reddit-this{
+        width: 200px;
+    }
+    .modalbodystuff .reddit-this a{
+        margin-left: 40px;
+    }
+}
+
+@media (max-width : 451px){
+    .searchdiv{
+        width: 130px;
+        height: 34px;
+        margin-left: 20px;
+    }
+    .searchdiv input::placeholder{
+        font-size: 10px;
+    }
+    .userdiv img{
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    .userdiv i{
+        margin-left: -10px;
+    }
+    .iconsdivuser i{
+        font-size: 12px;
+        width: 17px;
+    }
+    .iconsdivuser i{
+        margin-right: 10px;
+    }
+}

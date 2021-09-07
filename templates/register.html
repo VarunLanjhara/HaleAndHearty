@@ -1,0 +1,49 @@
+{% load static %}
+{% load crispy_forms_tags  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
+    <title>Regsiter - Idk</title>
+</head>
+<body>
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h1 class="nameofwebsite">Idk Help :)</h1>
+            <h4 class="idkhelpme">Sign up to contact doctors about your health</h4>
+            <button class="github-login"><i class="fab fa-github"></i><a class="githublink" href="{% url 'social:begin' 'github' %}">Continue With Github</a></button>
+            <button class="google-login"><i class="fab fa-google"></i><a class="googlelink" href="{% url 'social:begin' 'google-oauth2' %}">Continue With Google</a></button>
+            <div class="orshit">
+                <div class="left-line"></div>
+                <h5>OR</h5>
+                <div class="right-line"></div>
+            </div>
+            {{register.username }}
+            {{register.email }}
+            {{register.password1 }}
+            {{register.password2 }}
+            <div class="g-recaptcha" data-sitekey="6LeNBC0cAAAAACVmoiJkb0eyii-uyFgC4D7vyCQ2" data-callback="enableBtn"></div>
+            <button type="submit" class="register-button-disable" id = "button" disabled>Register</button>
+            <h3 class="registerbottom">By signing up, you agree to our Terms , Data Policy and Cookies Policy .</h3>
+        </form>
+    </div>
+    <div class="belowthing">
+        <p>Have an account? <a href="{% url 'login' %}">Log in</a></p>
+        <p>{{register.errors}}</p>
+    </div>
+
+    <script>
+         function enableBtn(){
+            document.getElementById("button").disabled = false;
+            document.getElementById("button").classList.remove("register-button-disable")
+            document.getElementById("button").classList.add("register-button")
+        }
+    </script>
+</body>
+</html>

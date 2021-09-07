@@ -1,0 +1,182 @@
+{% load static %}
+{% load social_share %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.profile}} - Idk</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="navbarr">
+        <div class="logo">
+            Logo
+        </div>
+        <div class="searchdiv">
+            <i class="fas fa-search"></i>
+            <input type="search" class="searchh" placeholder="Search...">
+        </div>
+        <div class="iconsdivuser">
+            <i class="fas fa-bell" data-bs-toggle="tooltip" title="Notifications"></i>
+            <i class="fas fa-trophy" data-bs-toggle="tooltip" title="Achievements Such As Points"></i>
+            <i class="fas fa-envelope" data-bs-toggle="tooltip" title="Messages"></i>
+            <i class="fas fa-plus" data-bs-toggle="tooltip" title="Ask Questions"></i>
+        </div>
+        <div class="userdiv">
+            <img src="{{request.user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
+            <i class="fas fa-angle-down" onclick="usernav()"></i>
+            <div class="divofuserthings" id = "navbar-user">
+                <a href="{% url 'profile' user.profile %}" target="_blank" onclick="usernav()">
+                    <div class="upperpart">
+                        <img src="{{request.user.profile.image.url}}" alt="">
+                        <h3>{{request.user}}</h3>
+                        <i class="fas fa-chevron-right"></i>
+                        <hr>
+                    </div>
+                </a>
+                <div class="middlepart">
+                    <div class="askquestions">
+                        <i class="fas fa-question"></i>
+                        <p>Ask Questions</p>
+                    </div>
+                    <div class="coinsthing">
+                        <i class="fas fa-coins"></i>
+                        <p>Coins</p>
+                    </div>
+                    <div class="yourcontent">
+                        <i class="fas fa-book"></i>
+                        <p>Your Content</p>
+                    </div>
+                    <div class="leaderboard">
+                        <i class="far fa-chart-bar"></i>
+                        <p>Leaderboard</p>
+                    </div>
+                    <hr>
+                </div>
+                <div class="lastpart">
+                    <div class="contact">
+                        <p data-bs-toggle="modal" data-bs-target="#contact" onclick="usernav()">Contact</p>
+                    </div>
+                    <div class="about">
+                        <p>About</p>
+                    </div>
+                    <div class="help">
+                        <p>Help</p>
+                    </div>
+                    <div class="logout">
+                        <p><a href="/logout">Logout</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="modal fade modal-divbruh" id="contact" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Contact Form :)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Your Name</label>
+                        <input type="text" name = "name" class="form-control" id="formGroupExampleInput" placeholder="Enter your Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Your Email</label>
+                        <input type="email" name = "email" class="form-control" id="formGroupExampleInput2" placeholder="Enter your Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Describe what you want to contact us for here</label>
+                        <textarea class="form-control" name = "message" id="exampleFormControlTextarea1" rows="3" placeholder="Your message" onkeyup="bot()" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="modalbtn" id = "buttonmodal" disabled>Submit</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="userprofilestuff">
+            <div class="profilestuff">
+            <img src="{{user.profile.image.url}}" alt="" data-bs-toggle="tooltip" title = "{{user.profile}}">
+            <h4>{{user.profile}}</h4>
+            </div>
+            <p class="description">{{user.profile.about}}</p>
+            <i class="fas fa-share sharebutton" data-bs-toggle="modal" data-bs-target="#sharemodel"></i>
+            <i class="fas fa-calendar-day"></i><p class="joinedthign">Joined {{user.profile.usercreated}}</p>
+            {% if user.profile == request.user.profile %}
+                <a href="{% url 'update_profile' %}" class="userediticon"><i class="fas fa-user-edit" data-bs-toggle="tooltip" title = "Edit Profile"></i></a>
+            {% endif %}
+            <hr class="underprofilestuff">
+            <div class="stuff">
+                <a href="" class="profile">Profile</a>
+                <a href="">0 Answers</a>
+                <a href="">0 Questions</a>
+                <a href="">0 Followers</a>
+                <a href="">0 Following</a>
+            </div>
+            <hr class="stuffunder">
+            <div class="sidebarstuff">
+                <h4>Ask Questions</h4>
+                <i class="fas fa-plus"></i>
+            </div>
+            <div class="sidebarstuff2">
+                <h4>Answers Questions</h4>
+                <i class="fas fa-plus"></i>
+            </div>
+      </div>
+
+
+      <!-- share div stuff here  -->
+        <div class="modal fade" id = "sharemodel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content modalshare">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Share {{user.profile}} Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modalbodystuff">
+                    {% post_to_facebook object_or_url  %}
+                    {% post_to_whatsapp  object_or_url %}
+                    {% post_to_reddit  object_or_url %}
+                </div>
+            </div>
+            </div>
+        </div>
+
+      <script>
+          function bot(){
+                if (document.getElementById("exampleFormControlTextarea1").value.length <= 15){
+                    document.getElementById("buttonmodal").disabled = true
+                }
+                else if (document.getElementById("exampleFormControlTextarea1").value.length >= 15){
+                    document.getElementById("buttonmodal").disabled = false
+                }
+            }
+
+          function usernav(){
+              if (document.getElementById("navbar-user").style.display == "none"){
+                document.getElementById("navbar-user").style.display = "block"
+              }
+              else{
+                document.getElementById("navbar-user").style.display = "none"
+              }
+          }
+
+      </script>
+</body>
+</html>
