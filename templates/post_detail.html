@@ -24,13 +24,45 @@
             <p class="whenposted">Posted {{object.created|naturaltime}}</p>
         </div>
         <div class="titlestuff">
-            <a href="{% url 'post_detail' post.title %}" target="_blank">
+            <a href="{% url 'post_detail' post.pk %}" target="_blank">
                 {{object.title}}
             </a>
         </div>
         <div class="bodystuff">
             {{object.body|safe}}
         </div>
+        <div class="bottom-stuff">
+            <div class="answer-field">
+                <i class="far fa-edit"></i>
+                <span class="answer">Answer</span>
+            </div>
+            <a>
+                <div class="save-field">
+                    <i class="far fa-save"></i>
+                    <span class="save">Save</span>
+                </div>
+            </a>
+            <div class="report-field" data-bs-toggle="modal" data-bs-target="#modalofreport">
+                <i class="far fa-flag"></i>
+                <span class="report">Report</span>
+            </div>
+            <div class="share-field" data-bs-toggle="modal" data-bs-target="#modalofreport">
+                <i class="far fa-share-square" data-bs-toggle="tooltip" title="Share"></i>
+                <span class="share">Share</span>
+            </div>
+            {% if request.user == object.author %}
+                <i class="fas fa-ellipsis-h"></i>
+            {% endif %}
+        </div>
   </div>
+
+  <!-- <div class="answerdivhahahah">
+      <form action="" method="POST">
+          {% csrf_token %}
+          <input type="text" name = "comment" placeholder="Enter Shit Here">
+          <input type="hidden" name = "postid" value="{{object.title}}">
+          <button type="submit">Answer</button>
+      </form>
+  </div> -->
 </body>
 </html>

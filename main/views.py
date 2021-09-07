@@ -60,7 +60,7 @@ def registerUser(request):
             register = RegisterForm()
         return render(request,"register.html",{"register":register})
 
-def home(request):
+def home(request,id,slug):
     if request.method == "POST":
         name = request.POST["name"]
         email = request.POST["email"]
@@ -68,7 +68,32 @@ def home(request):
         contact = Contact(name=name,email=email,message=message)
         contact.save()
     else:
-        return render(request,"home.html")
+        profile = Profile.objects.all()
+        followers = profile.followers.all()
+        numberoffollowers = len(followers)
+        for follower in followers:
+            if follower == request.user:
+                isfollowing = True
+            else:
+                isfollowing = False
+        post = get_object_or_404(Post,id = id,slug = slug)
+        if post.save.filer(id = request.user.id).exists():
+            issave = True;
+        context = {
+            "numberoffollowers":numberoffollowers,
+            "followers":followers,
+            "isfollowing":isfollowing,
+            "issave":issave
+        }
+        return render(request,"home.html",context)
+
+# def save_post(self,request,pk):
+#     post = Post.objects.get(pk = pk)
+#     if post.save.filter(pk = request.user.pk).exists():
+#         post.save.remove(request.user)
+#     else:
+#         post.save.add(request.user)
+#     return HttpResponse("/")
 
 def logoutUser(request):
     logout(request)
@@ -102,9 +127,9 @@ class Profilee(DetailView,LoginRequiredMixin):
     template_name = "profile.html"
     queryset = User.objects.all()
 
-    def get_object(self):
-        username = self.kwargs.get("username")
-        return get_object_or_404(User,username = username)
+    # def get_object(self):
+    #     username = self.kwargs.get("username")
+    #     return get_object_or_404(User,username = username)
 
 class PostListView(ListView):
     model = Post
@@ -125,9 +150,20 @@ class PostDetailview(DetailView):
     queryset = Post.objects.all()
     template_name = "post_detail.html"
 
-    def get_object(self):
-        title = self.kwargs.get("title")
-        return get_object_or_404(Post,title = title)
+    # def get_object(self):
+    #     title = self.kwargs.get("title")
+    #     return get_object_or_404(Post,title = title)
+
+    # def post(self,request):
+    #     comment = request.POST.get("comment")
+    #     user = request.user
+    #     postid = request.POST.get("postid")
+    #     post = Post.objects.get(id = postid)
+
+    #     answer = Answer(comment = comment,user = user,post= post)
+    #     answer.save()
+    #     return redirect("/")
+
 
 class PostCreateView(CreateView,LoginRequiredMixin):
     model = Post
@@ -158,9 +194,9 @@ class PostUpdateView(UpdateView,UserPassesTestMixin,LoginRequiredMixin):
             return True
         return False
 
-    def get_object(self):
-        title = self.kwargs.get("title")
-        return get_object_or_404(Post,title = title)
+    # def get_object(self):
+    #     title = self.kwargs.get("title")
+    #     return get_object_or_404(Post,title = title)
 
 
 class PostDeleteView(DeleteView,UserPassesTestMixin,LoginRequiredMixin):
@@ -173,6 +209,26 @@ class PostDeleteView(DeleteView,UserPassesTestMixin,LoginRequiredMixin):
         post = self.get_object()
         return self.request.user == post.author;
 
-    def get_object(self):
-        title = self.kwargs.get("title")
-        return get_object_or_404(Post,title = title)
+    # def get_object(self):
+    #     title = self.kwargs.get("title")
+    #     return get_object_or_404(Post,title = title)
+
+class AddFollowers(View,LoginRequiredMixin):
+    def post(self,request,pk):
+        profile = Profile.objects.get(pk=pk)
+        profile.followers.add(request.user)
+        return redirect("/")
+
+    # def get_object(self):
+    #     username = self.kwargs.get("username")
+    #     return get_object_or_404(User,username = username)
+
+class RemoveFollowers(View,LoginRequiredMixin):
+    def post(self,request,pk):
+        profile = Profile.objects.get(pk=pk)
+        profile.followers.remove(request.user)
+        return redirect("/")
+
+    # def get_object(self):
+    #     username = self.kwargs.get("username")
+    #     return get_object_or_404(User,username = username)
