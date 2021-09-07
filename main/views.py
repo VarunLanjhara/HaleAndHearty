@@ -127,9 +127,9 @@ class Profilee(DetailView,LoginRequiredMixin):
     template_name = "profile.html"
     queryset = User.objects.all()
 
-    # def get_object(self):
-    #     username = self.kwargs.get("username")
-    #     return get_object_or_404(User,username = username)
+    def get_object(self):
+        username = self.kwargs.get("username")
+        return get_object_or_404(User,username = username)
 
 class PostListView(ListView):
     model = Post
