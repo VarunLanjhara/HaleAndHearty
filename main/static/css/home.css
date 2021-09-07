@@ -1215,6 +1215,84 @@ a{
     display: none;
 }
 
+.postanswersdiv{
+    width: 572px;
+    height: auto;
+    margin-left: 340px;
+    background-color: #fff;
+    border: 1px solid #dee0e1;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
+    margin-bottom: 9px;
+    cursor: pointer;
+}
+
+.postanswersdiv .topstuff{
+    display: flex;
+    width: 538px;
+    height: 54px;
+    padding: 10px 18px;
+}
+
+.postanswersdiv .topstuff .whenanswered{
+    color: #636466;
+    font-size: 13px;
+    line-height: 18px;
+    margin-top: 5px;
+}
+
+.postanswersdiv .topstuff img{
+    border-radius: 100%;
+}
+
+.postanswersdiv .topstuff span{
+    color: #636466;
+    font-size: 13px;
+    margin-right: 7px;
+    margin-top: 3px;
+}
+
+.postanswersdiv .topstuff .username{
+    color: #282829;
+    font-size: 13px;
+    line-height: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    margin-right: 7px;
+    margin-left: 7px;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+.postanswersdiv .topstuff .username:hover{
+    text-decoration: underline;
+    color: #282829;
+}
+
+.postanswersdiv .topstuff .followshit{
+    margin-top: 6px;
+    color: #2e69ff;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 18px;
+    cursor: pointer;
+    margin-right: 14px;
+}
+
+.postanswersdiv .topstuff .followshit:hover{
+    color: #2e69ff;
+    text-decoration: underline;
+}
+
+.postanswersdiv .bodystuff{
+    padding: 4px 23px;
+    height: auto;
+    font-size: 15px;
+    color: #282829;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 21px;
+}
+
 @media (max-width : 1300px){
     .askingsidebar{
         display: none;

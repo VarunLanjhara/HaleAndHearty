@@ -230,7 +230,23 @@
               <button type="submit">Answer</button>
           </div>
       </form>
+      <hr>
   </div>
+
+  {% for comment in comments %}
+    <div class="postanswersdiv">
+        <div class="topstuff">
+            <img src="{{comment.user.profile.image.url}}" width="36px" height="36px" alt="">
+            <p class="username">{{comment.user}}</p>
+            <span>.</span>
+            <p class="followshit">Follow</p>
+            <p class="whenanswered">Answered {{comment.commented|naturaltime}}</p>
+        </div>
+        <div class="bodystuff">
+            {{comment.body|safe}}
+        </div>
+    </div>
+  {% endfor %}
 
   <script type="text/javascript">
     function openasnwerpanel(){
