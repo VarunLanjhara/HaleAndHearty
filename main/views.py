@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView,PasswordResetConfirmView,PasswordResetCompleteView
-from main.models import Comment, Contact,Profile
+from main.models import Comment, Contact,Profile,Notifications
 from main.forms import ProfileUpdateForm,UserUpdateForm,PostCreateView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -197,6 +197,8 @@ class PostDetailview(View):
             new_comment.user = request.user
             new_comment.post = post
             new_comment.save()
+            notification = Notifications(post = post,user = post.author,sender = new_comment.user)
+            notification.save()
             return redirect(f"/posts/{post.pk}")
         commentss = Comment.objects.all()
         numberofcomments = len(commentss)
@@ -360,3 +362,8 @@ class SavePost(View):
 def favouratelist(request):
     haha = Post.objects.filter(favourite = request.user)
     return render(request,"favouritelist.html",{"haha":haha})
+
+def notificationstuff(request):
+    user = request.user
+    notification = Notifications.objects.filter(user = user).order_by("date")
+    return render(request,"notifications.html",{"notification":notification})

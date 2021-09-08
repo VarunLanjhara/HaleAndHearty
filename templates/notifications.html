@@ -1,18 +1,18 @@
-{% load humanize %}
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
-    <title>Saved Posts - {{request.user}}</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - {{request.user}}</title>
 </head>
 <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -20,14 +20,12 @@
     return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 </script>
-
 <style>
     a{
         text-decoration: none;
     }
 </style>
 <body style="background-color: rgba(165, 165, 165, 0.164);">
-
     <header class="navbarr">
         <div class="logo">
             Logo
@@ -90,7 +88,6 @@
             </div>
         </div>
     </header>
-
     <div class="modal fade modal-divbruh" id="contact" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -121,6 +118,21 @@
           </div>
         </div>
       </div>
+
+        <p style="margin-top: 80px;color: #282829;font-size: 15px;line-height: 21px;margin-left: 351px;">Notifications</p>
+        <hr width="517px" style="position: relative;left: 351px;color: #636466;">
+        {% for notification in notification %}  
+          <div class="notificationdiv">
+            <a href="{% url 'post_detail' notification.post.pk %}">
+              <div class="headerstuff">
+                  <img src="{{notification.sender.profile.image.url}}" alt="">
+                  <p class="useraname">{{notification.sender}}</p>
+                  <p class="time">{{notification.date|naturaltime}}</p>
+              </div>
+                <p style="color: #282829;font-size: 16px;font-weight: 500;line-height: 21px;padding: 8px 18px;">{{notification.sender}} Answer On Your Question</p>
+            </a>
+          </div>
+        {% endfor %}
       
       <script>
           function usernav(){
@@ -142,104 +154,5 @@
             }
 
       </script>
-
-<div class="topspacehahah">
-
-</div>
-
-<div class="useraskquestiontop">
-    <!-- <a href="{% url 'ask_question' %}"> -->
-        <div class="top">
-            <img src="{{request.user.profile.image.url}}" alt="" width="28px" height="28px">
-            <p>{{request.user}}</p>
-        </div>
-        <h3>{{request.user}} Your Saved Posts :)</h3>
-    <!-- </a> -->
-  </div>
-
-    {% for post in haha %}
-    {% if post %}
-        <div class="postdivgobrr">
-            <div class="postdivheader">
-                <img src="{{post.author.profile.image.url}}" alt="" width="36px" height="36px" class="postdivheaderimg">
-                <a href="{% url 'profile' post.author.pk %}"><p class="postdivheadername">{{post.author}}</p></a>
-                <span>.</span>
-                <a href="{% url 'profile' post.author.pk %}"><p class="postdivheaderfollow">Follow</p></a>
-                <p class="whenposted">Posted {{post.created|naturaltime}}</p>
-            </div>
-            <div class="titlestuff">
-                <a href="{% url 'post_detail' post.pk %}" target="_blank">
-                    {{post.title}}
-                </a>
-            </div>
-            <div class="bodystuff">
-                {{post.body|safe}}
-                <hr class="laststuffunder">
-            </div>
-            <div class="bottom-stuff">
-                <a href="{% url 'post_detail' post.pk %}">
-                    <div class="answer-field">
-                        <i class="far fa-edit"></i>
-                        <span class="answer">Answer</span>
-                    </div>
-                </a>
-                <a> 
-                    <a href="{% url 'post_detail' post.pk %}">
-                        <div class="save-field">
-                            <i class="far fa-save"></i>
-                            <span class="save">UnSave</span>
-                        </div>
-                    </a> 
-                </a>
-                <div class="report-field" data-bs-toggle="modal" data-bs-target="#modalofreport">
-                    <i class="far fa-flag"></i>
-                    <span class="report">Report</span>
-                </div>
-                <a href="{% url 'post_detail' post.pk %}">
-                    <div class="share-field">
-                        <i class="far fa-share-square" data-bs-toggle="tooltip" title="Share"></i>
-                        <span class="share">Share</span>
-                    </div>
-                </a>
-                {% if request.user == post.author %}
-                    <i class="fas fa-ellipsis-h"></i>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
-    {% endfor %}
-
-  <div class="modal fade" id="modalofreport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" style="margin-top: 150px;">
-            <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Report question</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body modalreportchecks">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value = "" id="flexCheckDefault" onchange="document.getElementById('submitbtn').disabled = !this.checked">
-                    <p>Disparaging or adversarial towards a person or group</p>
-                    <label class="form-check-label" for="flexCheckDefault">Harassment</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value = "" id="flexCheckDefault" onchange="document.getElementById('submitbtn').disabled = !this.checked">
-                    <label class="form-check-label" for="flexCheckDefault">Spam</label>
-                    <p>Undisclosed promotion for a link or product</p>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value = "" id="flexCheckDefault" onchange="document.getElementById('submitbtn').disabled = !this.checked">
-                    <label class="form-check-label" for="flexCheckDefault">Incorrect topics</label>
-                    <p>Question topics are not related to health</p>
-                </div>
-            </div>
-            <div class="modal-footer modalreportbottom">
-            <button type="button" class="cancelbtn" data-bs-dismiss="modal">Cancel</button>
-            <a href="{% url 'home' %}"><button type="button" class="submitbtn" id = "submitbtn" disabled>Submit</button></a>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </body>
 </html>

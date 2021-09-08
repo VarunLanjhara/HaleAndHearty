@@ -22,5 +22,6 @@ urlpatterns = [
     path('posts/<int:pk>/likes/',AddLikes.as_view(),name = "addlikes"),
     path('posts/<int:pk>/dislikes/',AddDislike.as_view(),name = "adddislikes"),
     path('posts/<int:pk>/save/',SavePost.as_view(),name = "save_post"),
-    path("savedposts/",views.favouratelist,name = "saveposts")
+    path("savedposts/",views.favouratelist,name = "saveposts"),
+    path('notifications/',views.notificationstuff,name = "notifications")
 ]
