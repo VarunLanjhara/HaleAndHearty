@@ -1,5 +1,6 @@
 {% load static %}
 {% load humanize %}
+{% load social_share %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -207,7 +208,7 @@
                 <i class="far fa-flag"></i>
                 <span class="report">Report</span>
             </div>
-            <div class="share-field" data-bs-toggle="modal" data-bs-target="#modalofreport">
+            <div class="share-field" data-bs-toggle="modal" data-bs-target="#sharepostshahahhha">
                 <i class="far fa-share-square" data-bs-toggle="tooltip" title="Share"></i>
                 <span class="share">Share</span>
             </div>
@@ -270,6 +271,22 @@
         </div>
     </div>
   {% endfor %}
+
+  <div class="modal fade" id="sharepostshahahhha" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 90px;">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Share {{post.author}} Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modalbodystuff">
+                        {% post_to_facebook object_or_url %}
+                        {% post_to_whatsapp  object_or_url %}
+                        {% post_to_reddit  object_or_url %}
+                </div>
+            </div>
+        </div>
+    </div>
 
   <script type="text/javascript">
     function openasnwerpanel(){

@@ -191,10 +191,12 @@
                         <i class="far fa-flag"></i>
                         <span class="report">Report</span>
                     </div>
-                    <div class="share-field" data-bs-toggle="modal" data-bs-target="#modalofreport">
-                        <i class="far fa-share-square" data-bs-toggle="tooltip" title="Share"></i>
-                        <span class="share">Share</span>
-                    </div>
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <div class="share-field">
+                            <i class="far fa-share-square" data-bs-toggle="tooltip" title="Share"></i>
+                            <span class="share">Share</span>
+                        </div>
+                    </a>
                     {% if request.user == post.author %}
                         <i class="fas fa-ellipsis-h"></i>
                     {% endif %}

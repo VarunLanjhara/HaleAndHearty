@@ -125,6 +125,7 @@ class PasswordResetVieww(PasswordResetView):
 class Profilee(View,LoginRequiredMixin):
     def get(self,request,pk):
         profile = Profile.objects.get(pk=pk)
+        comment = Comment.objects.get(pk = pk)
         user = profile.user
         posts = Post.objects.filter(author=user).order_by('-created')
         followers = profile.followers.all()
@@ -141,6 +142,7 @@ class Profilee(View,LoginRequiredMixin):
         context = {
             "profile":profile,
             'user':user, 
+            'comment':comment,
             'posts':posts,
             'number_of_followers': number_of_followers,
             'is_following': is_following,
@@ -154,23 +156,9 @@ class Profilee(View,LoginRequiredMixin):
 class PostListView(View):
     def get(self,request,*args,**kwargs):
         posts = Post.objects.all()
-        # profile = Profile.objects.all()
-        # followers = profile.followers.all()
-        # numberoffollowers = len(followers)
-        # if len(followers) == 0:
-        #     is_following = False
-        # for follower in followers:
-        #     if follower == request.user:
-        #         is_following = True
-        #         break
-        #     else:
-        #         is_following = False
         posts.order_by("-created")
         context = {
             "posts":posts,
-            # 'is_following':is_following,
-            # 'numberoffollowers':numberoffollowers,
-            # 'followers':followers
         }
         return render(request,"home.html",context)
 
