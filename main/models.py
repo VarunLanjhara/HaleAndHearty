@@ -28,6 +28,7 @@ class Post(models.Model):
     title = models.CharField(max_length=150)
     body = RichTextField(blank = True,null = True)
     created = models.DateTimeField(default=now)
+    favourite = models.ManyToManyField(User,related_name="favourite",blank = True)
 
     def __str__(self):
         return str(self.title)

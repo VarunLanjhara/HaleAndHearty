@@ -340,3 +340,23 @@ class AddDislike(View):
             post.comment.dislikes.remove(request.user)
 
         return redirect(f'/posts/{post.pk}')
+
+class SavePost(View):
+    def post(self,request,pk,*args,**kwargs):
+        post = Post.objects.get(pk = pk)
+
+        is_favourite = False
+
+        for favourite in post.favourite.all():
+            if favourite == request.user:
+                is_favourite = True
+                break
+        if not is_favourite:
+            post.favourite.add(request.user)
+        if is_favourite:
+            post.favourite.remove(request.user)
+        return redirect(f'/posts/{post.pk}')
+
+def favouratelist(request):
+    haha = Post.objects.filter(favourite = request.user)
+    return render(request,"favouritelist.html",{"haha":haha})

@@ -1,6 +1,6 @@
 from django.urls import path,include
 from main import views
-from main.views import AddFollower, PasswordResetVieww, PostListView, RemoveFollower, update_profile,AddDislike,AddLikes
+from main.views import AddFollower, PasswordResetVieww, PostListView, RemoveFollower, SavePost, update_profile,AddDislike,AddLikes
 from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView,PasswordResetConfirmView,PasswordResetCompleteView
 from main.views import PostCreateView,PostDetailview,PostUpdateView,PostDeleteView
 urlpatterns = [
@@ -21,4 +21,6 @@ urlpatterns = [
     path('profile/<int:pk>/followers/remove/',RemoveFollower.as_view(),name = "remove_followers"),
     path('posts/<int:pk>/likes/',AddLikes.as_view(),name = "addlikes"),
     path('posts/<int:pk>/dislikes/',AddDislike.as_view(),name = "adddislikes"),
+    path('posts/<int:pk>/save/',SavePost.as_view(),name = "save_post"),
+    path("savedposts/",views.favouratelist,name = "saveposts")
 ]
