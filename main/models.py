@@ -34,9 +34,11 @@ class Post(models.Model):
 
 class Comment(models.Model):
     body = RichTextField(blank = True,null = True)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    post = models.OneToOneField(Post,on_delete=models.CASCADE)
     commented = models.DateTimeField(default=now)
+    likes = models.ManyToManyField(User,blank=True,related_name="likes")
+    dislikes = models.ManyToManyField(User,blank=True,related_name="dislikes")
 
     def __str__(self):
         return str(self.body)

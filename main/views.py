@@ -107,7 +107,7 @@ def update_profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            return redirect(f"/profile/{request.user.profile}")
+            return redirect(f"/profile/{request.user.pk}")
         else:
             return redirect("update_profile")
     else: 
@@ -296,3 +296,59 @@ class RemoveFollower(LoginRequiredMixin, View):
         profile.followers.remove(request.user)
 
         return redirect('profile', pk=profile.pk)
+
+class AddLikes(View):
+    def post(self,request,pk,*args,**kwargs):
+        post = Post.objects.get(pk=pk)
+
+        isdisliked = False
+
+        for dislike in post.comment.dislikes.all():
+            if dislike == request.user:
+                isdisliked = True
+                break
+
+        if isdisliked:
+            post.comment.dislikes.remove(request.user)
+
+        isliked = False
+
+        for like in post.comment.likes.all():
+            if like == request.user:
+                isliked = True
+                break
+
+        if not isliked:
+            post.comment.likes.add(request.user)
+        if isliked:
+            post.comment.likes.remove(request.user)
+
+        return redirect(f'/posts/{post.pk}')
+
+class AddDislike(View):
+    def post(self,request,pk,*args,**kwargs):
+        post = Post.objects.get(pk=pk)
+
+        isliked = False
+
+        for like in post.comment.likes.all():
+            if like == request.user:
+                isliked = True
+                break
+
+        if isliked:
+            post.comment.likes.remove(request.user)
+
+        isdisliked = False
+
+        for dislike in post.comment.dislikes.all():
+            if dislike == request.user:
+                isdisliked = True
+                break
+
+        if not isdisliked:
+            post.comment.dislikes.add(request.user)
+        if isdisliked:
+            post.comment.dislikes.remove(request.user)
+
+        return redirect(f'/posts/{post.pk}')
