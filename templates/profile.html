@@ -114,18 +114,20 @@
             <div class="profilestuff">
             <img src="{{user.profile.image.url}}" alt="" data-bs-toggle="tooltip" title = "{{user.profile}}">
             <h4>{{user.profile}}</h4>
+            {% if user.profile == request.user %}
+            {% else %}
             {% if is_following %}
             <form action="{% url 'remove_followers' profile.pk %}" method="post">
                 {% csrf_token %}
-                <button type="submit">UnFollow</button>
+                <button type="submit" style="border: none;outline: none;background-color:transparent;color: #939598;font-size: 15px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;margin-left: 38px;margin-top: 37px;">UnFollow</button>
             </form>
             {% else %}
                 <form action="{% url 'add_followers' profile.pk %}" method="post">
                     {% csrf_token %}
-                    <button type="submit">Follow</button>
+                    <button type="submit" style="border: none;outline: none;background-color:transparent;color: #2e69ff;font-size: 15px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;margin-left: 38px;margin-top: 37px;">Follow</button>
                 </form>
             {% endif %}
-            <h1>Followers : {{number_of_followers}}</h1>
+            {% endif %}
             </div>
             <p class="description">{{user.profile.about}}</p>
             <i class="fas fa-share sharebutton" data-bs-toggle="modal" data-bs-target="#sharemodel"></i>
@@ -138,17 +140,17 @@
                 <a href="" class="profile">Profile</a>
                 <a href="">0 Answers</a>
                 <a href="">0 Questions</a>
-                <a href="">0 Followers</a>
+                <a href="">{{number_of_followers}} Followers</a>
                 <a href="">0 Following</a>
             </div>
             <hr class="stuffunder">
             <div class="sidebarstuff">
                 <h4>Ask Questions</h4>
-                <i class="fas fa-plus"></i>
+                <a href="{% url 'ask_question' %}"><i class="fas fa-plus"></i></a>
             </div>
             <div class="sidebarstuff2">
                 <h4>Answers Questions</h4>
-                <i class="fas fa-plus"></i>
+                <a href="{% url 'home' %}"><i class="fas fa-plus"></i></a>
             </div>
       </div>
 

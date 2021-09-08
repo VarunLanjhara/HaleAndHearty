@@ -162,7 +162,7 @@
                     <img src="{{post.author.profile.image.url}}" alt="" width="36px" height="36px" class="postdivheaderimg">
                     <a href="{% url 'profile' post.author.pk %}"><p class="postdivheadername">{{post.author}}</p></a>
                     <span>.</span>
-                    <p class="postdivheaderfollow">Follow</p>
+                    <a href="{% url 'profile' post.author.pk %}"><p class="postdivheaderfollow">Follow</p></a>
                     <p class="whenposted">Posted {{post.created|naturaltime}}</p>
                 </div>
                 <div class="titlestuff">

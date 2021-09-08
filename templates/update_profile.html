@@ -33,7 +33,7 @@
             <img src="{{request.user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
             <i class="fas fa-angle-down" onclick="usernav()"></i>
             <div class="divofuserthings" id = "navbar-user">
-                <a href="{% url 'profile' user.profile %}" target="_blank" onclick="usernav()">
+                <a href="{% url 'profile' user.pk %}" target="_blank" onclick="usernav()">
                     <div class="upperpart">
                         <img src="{{request.user.profile.image.url}}" alt="">
                         <h3>{{request.user}}</h3>

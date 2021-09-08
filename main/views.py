@@ -154,9 +154,23 @@ class Profilee(View,LoginRequiredMixin):
 class PostListView(View):
     def get(self,request,*args,**kwargs):
         posts = Post.objects.all()
+        # profile = Profile.objects.all()
+        # followers = profile.followers.all()
+        # numberoffollowers = len(followers)
+        # if len(followers) == 0:
+        #     is_following = False
+        # for follower in followers:
+        #     if follower == request.user:
+        #         is_following = True
+        #         break
+        #     else:
+        #         is_following = False
         posts.order_by("-created")
         context = {
-            "posts":posts
+            "posts":posts,
+            # 'is_following':is_following,
+            # 'numberoffollowers':numberoffollowers,
+            # 'followers':followers
         }
         return render(request,"home.html",context)
 
@@ -174,6 +188,7 @@ class PostDetailview(View):
         form = CommentForm()
         commentss = Comment.objects.filter(post=post)
         numberofcomments = len(commentss)
+        
 
         comments = Comment.objects.filter(post=post).order_by('-commented')
 
