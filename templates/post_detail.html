@@ -257,19 +257,21 @@
             {{comment.body|safe}}
         </div>
         <div class="bottomstuff" style="display: flex;">
-            <form action="{% url 'addlikes' post.pk %}" method = "POST">
+            <form action="{% url 'addlikes' post.pk comment.pk %}" method = "POST">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{request.path}}">
                 <button type="submit" style="background-color: transparent;border: none;outline: none;">
                     <i class="far fa-thumbs-up" style="font-size: 19px;margin-left: 24px;margin-bottom: 7px;" data-bs-toggle="tooltip" data-bs-placement="top" title = "Upvote Answer" onclick="colorblue()" id = "thumbsup"></i>
-                    <span>{{post.comment.likes.all.count}}</span>
+                    <span>{{comment.likes.all.count}}</span>
                 </button>
             </form>
-            <form action="{% url 'adddislikes' post.pk %}" method = "POST">
+            <form action="{% url 'adddislikes' post.pk comment.pk %}" method = "POST">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{request.path}}">
                 <button type="submit" style="background-color: transparent;border: none;outline: none;">
                     <i class="far fa-thumbs-down" style="font-size: 19px;margin-left: 24px;margin-bottom: 7px;" data-bs-toggle="tooltip" data-bs-placement="bottom" title = "Downvote Answer" onclick="colororange()" id = "thumbsdown"></i>
                 </button>
-                <span>{{post.comment.dislikes.all.count}}</span>
+                <span>{{comment.dislikes.all.count}}</span>
             </form>
         </div>
     </div>

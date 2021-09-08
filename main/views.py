@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls.base import reverse_lazy
 from main.forms import CommentForm, RegisterForm
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
@@ -289,59 +289,61 @@ class RemoveFollower(LoginRequiredMixin, View):
 
 class AddLikes(View):
     def post(self,request,pk,*args,**kwargs):
-        post = Post.objects.get(pk=pk)
+        comment = Comment.objects.get(pk=pk)
 
         isdisliked = False
 
-        for dislike in post.comment.dislikes.all():
+        for dislike in comment.dislikes.all():
             if dislike == request.user:
                 isdisliked = True
                 break
 
         if isdisliked:
-            post.comment.dislikes.remove(request.user)
+            comment.dislikes.remove(request.user)
 
         isliked = False
 
-        for like in post.comment.likes.all():
+        for like in comment.likes.all():
             if like == request.user:
                 isliked = True
                 break
 
         if not isliked:
-            post.comment.likes.add(request.user)
+            comment.likes.add(request.user)
         if isliked:
-            post.comment.likes.remove(request.user)
+            comment.likes.remove(request.user)
 
-        return redirect(f'/posts/{post.pk}')
+        next = request.POST.get("next",'/')
+        return HttpResponseRedirect(next)
 
 class AddDislike(View):
     def post(self,request,pk,*args,**kwargs):
-        post = Post.objects.get(pk=pk)
+        comment = Comment.objects.get(pk=pk)
 
         isliked = False
 
-        for like in post.comment.likes.all():
+        for like in comment.likes.all():
             if like == request.user:
                 isliked = True
                 break
 
         if isliked:
-            post.comment.likes.remove(request.user)
+            comment.likes.remove(request.user)
 
         isdisliked = False
 
-        for dislike in post.comment.dislikes.all():
+        for dislike in comment.dislikes.all():
             if dislike == request.user:
                 isdisliked = True
                 break
 
         if not isdisliked:
-            post.comment.dislikes.add(request.user)
+            comment.dislikes.add(request.user)
         if isdisliked:
-            post.comment.dislikes.remove(request.user)
+            comment.dislikes.remove(request.user)
 
-        return redirect(f'/posts/{post.pk}')
+        next = request.POST.get("next",'/')
+        return HttpResponseRedirect(next)
 
 class SavePost(View):
     def post(self,request,pk,*args,**kwargs):
