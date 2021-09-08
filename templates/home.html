@@ -182,10 +182,12 @@
                         </div>
                     </a>
                     <a>
-                        <div class="save-field">
-                            <i class="far fa-save"></i>
-                            <span class="save">Save</span>
-                        </div>
+                        <a href="{% url 'post_detail' post.pk %}">
+                            <div class="save-field">
+                                <i class="far fa-save"></i>
+                                <span class="save">Save</span>
+                            </div>
+                        </a>
                     </a>
                     <div class="report-field" data-bs-toggle="modal" data-bs-target="#modalofreport">
                         <i class="far fa-flag"></i>

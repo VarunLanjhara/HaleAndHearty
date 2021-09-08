@@ -20,6 +20,12 @@
     return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 </script>
+
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
 <body style="background-color: rgba(165, 165, 165, 0.164);">
 
     <header class="navbarr">
@@ -137,6 +143,20 @@
 
       </script>
 
+<div class="topspacehahah">
+
+</div>
+
+<div class="useraskquestiontop">
+    <!-- <a href="{% url 'ask_question' %}"> -->
+        <div class="top">
+            <img src="{{request.user.profile.image.url}}" alt="" width="28px" height="28px">
+            <p>{{request.user}}</p>
+        </div>
+        <h3>{{request.user}} Your Saved Posts :)</h3>
+    <!-- </a> -->
+  </div>
+
     {% for post in haha %}
     {% if post %}
       <div class="postdivgobrr">
@@ -163,11 +183,13 @@
                         <span class="answer">Answer</span>
                     </div>
                 </a>
-                <a>
-                    <div class="save-field">
-                        <i class="far fa-save"></i>
-                        <span class="save">Save</span>
-                    </div>
+                <a> 
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <div class="save-field">
+                            <i class="far fa-save"></i>
+                            <span class="save">UnSave</span>
+                        </div>
+                    </a> 
                 </a>
                 <div class="report-field" data-bs-toggle="modal" data-bs-target="#modalofreport">
                     <i class="far fa-flag"></i>
@@ -186,6 +208,38 @@
       </div>
     {% endif %}
   {% endfor %}
-  
+
+  <div class="modal fade" id="modalofreport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="margin-top: 150px;">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Report question</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modalreportchecks">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value = "" id="flexCheckDefault" onchange="document.getElementById('submitbtn').disabled = !this.checked">
+                    <label class="form-check-label" for="flexCheckDefault">Harassment</label>
+                    <p>Disparaging or adversarial towards a person or group</p>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value = "" id="flexCheckDefault" onchange="document.getElementById('submitbtn').disabled = !this.checked">
+                    <label class="form-check-label" for="flexCheckDefault">Spam</label>
+                    <p>Undisclosed promotion for a link or product</p>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value = "" id="flexCheckDefault" onchange="document.getElementById('submitbtn').disabled = !this.checked">
+                    <label class="form-check-label" for="flexCheckDefault">Incorrect topics</label>
+                    <p>Question topics are not related to health</p>
+                </div>
+            </div>
+            <div class="modal-footer modalreportbottom">
+            <button type="button" class="cancelbtn" data-bs-dismiss="modal">Cancel</button>
+            <a href="{% url 'home' %}"><button type="button" class="submitbtn" id = "submitbtn" disabled>Submit</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
