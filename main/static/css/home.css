@@ -1726,7 +1726,12 @@ a{
 }
 
 @media (max-width : 451px){
-
+    .mylogogpbrr{
+        margin-left: -70px;
+    }
+    .searchh{
+        flex: 0.8;
+    }
     .postdivgobrr{
         width: 305px;
         margin-left: 6px;
