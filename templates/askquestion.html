@@ -21,20 +21,20 @@
     })
 </script>
 
-<body>
+<body style="background-color: rgba(165, 165, 165, 0.164);">
     <header class="navbarr">
         <div class="logo">
-            Logo
+            <a href="{% url 'home' %}"><img src="{% static 'images/logoboi.PNG' %}" class="mylogogpbrr" alt="" width="148px" height="47px" style="cursor: pointer;position: relative;left: 30px;"></a>
         </div>
         <div class="searchdiv">
             <i class="fas fa-search"></i>
             <input type="search" class="searchh" placeholder="Search...">
         </div>
         <div class="iconsdivuser">
-            <i class="fas fa-bell" data-bs-toggle="tooltip" title="Notifications"></i>
-            <i class="fas fa-trophy" data-bs-toggle="tooltip" title="Achievements Such As Points"></i>
-            <i class="fas fa-envelope" data-bs-toggle="tooltip" title="Messages"></i>
-            <i class="fas fa-plus" data-bs-toggle="tooltip" title="Ask Questions"></i>
+            <a href="{% url 'notifications' %}"><i class="fas fa-bell" data-bs-toggle="tooltip" title="Notifications"></i></a>
+            <a href="{% url 'reddemcoins' %}"><i class="fas fa-gift" data-bs-toggle="tooltip" title = "Redeem Coins"></i></a>
+            <a href="{% url 'ask_question' %}"><i class="fas fa-plus" data-bs-toggle="tooltip" title = "Ask Questions"></i></a>
+            <a href="{% url 'saveposts' %}"><i class="fas fa-save" data-bs-toggle="tooltip" title = "Saved Posts"></i></a>
         </div>
         <div class="userdiv">
             <img src="{{user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
@@ -139,6 +139,7 @@
 
     <!-- post create dviv here  -->
     <p class="askquestionabovetext">Ask Question</p>
+    <hr style="position: relative;top: 70px;width: 660px;left: 135px;">
     <div class="postcreatedivhaha">
         <form action="" method="POST">
             {% csrf_token %}
@@ -156,7 +157,7 @@
         </form>
     </div>
 
-    <div class="askingsidebar">
+    <!-- <div class="askingsidebar">
         <div class="topbarstuff">
             <p>Asking Question On Hail and Hearty</p>
         </div>
@@ -167,6 +168,10 @@
             <li>OhhNooo :O</li>
             <li>Hhahahahaha</li>
         </ol>
+    </div> -->
+
+    <div class="askquestionimage">
+        <img src="../media/profile_pics/ask.jpg">
     </div>
 
     <script>
