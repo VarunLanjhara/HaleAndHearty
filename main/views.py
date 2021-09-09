@@ -319,7 +319,7 @@ class AddLikes(View):
             # comment.user.profile.save()
             comment.likes.remove(request.user)
 
-        likesoncommnet = comment.likes.count()
+        likesoncommnet = comment.likes.count() - comment.dislikes.count()
         comment.user.profile.coins = likesoncommnet
         comment.user.profile.save()
 
@@ -358,7 +358,7 @@ class AddDislike(View):
             # comment.user.profile.save()
             comment.dislikes.remove(request.user)
         
-        likesoncommnet = comment.likes.count()
+        likesoncommnet = comment.likes.count() - comment.dislikes.count()
         comment.user.profile.coins = likesoncommnet
         comment.user.profile.save()
 
