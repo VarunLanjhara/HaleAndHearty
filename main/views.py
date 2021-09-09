@@ -299,6 +299,8 @@ class AddLikes(View):
                 break
 
         if isdisliked:
+            # comment.user.profile.coins += 1
+            # comment.user.profile.save()
             comment.dislikes.remove(request.user)
 
         isliked = False
@@ -309,9 +311,17 @@ class AddLikes(View):
                 break
 
         if not isliked:
+            # comment.user.profile.coins += 1
+            # comment.user.profile.save()
             comment.likes.add(request.user)
         if isliked:
+            # comment.user.profile.coins -= 1
+            # comment.user.profile.save()
             comment.likes.remove(request.user)
+
+        likesoncommnet = comment.likes.count()
+        comment.user.profile.coins = likesoncommnet
+        comment.user.profile.save()
 
         next = request.POST.get("next",'/')
         return HttpResponseRedirect(next)
@@ -328,6 +338,8 @@ class AddDislike(View):
                 break
 
         if isliked:
+            # comment.user.profile.coins -= 1
+            # comment.user.profile.save() 
             comment.likes.remove(request.user)
 
         isdisliked = False
@@ -338,9 +350,17 @@ class AddDislike(View):
                 break
 
         if not isdisliked:
+            # comment.user.profile.coins -= 1
+            # comment.user.profile.save()
             comment.dislikes.add(request.user)
         if isdisliked:
+            # comment.user.profile.coins += 1
+            # comment.user.profile.save()
             comment.dislikes.remove(request.user)
+        
+        likesoncommnet = comment.likes.count()
+        comment.user.profile.coins = likesoncommnet
+        comment.user.profile.save()
 
         next = request.POST.get("next",'/')
         return HttpResponseRedirect(next)
@@ -367,5 +387,5 @@ def favouratelist(request):
 
 def notificationstuff(request):
     user = request.user
-    notification = Notifications.objects.filter(user = user).order_by("date")
+    notification = Notifications.objects.filter(user = user).order_by("-date")
     return render(request,"notifications.html",{"notification":notification})

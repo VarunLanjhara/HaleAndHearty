@@ -18,7 +18,8 @@ class Profile(models.Model):
     about = models.TextField(default="I am nerd")
     location = models.CharField(max_length=100)
     usercreated = models.DateTimeField(default=now)
-    followers = models.ManyToManyField(User,blank=True,related_name="followers") 
+    followers = models.ManyToManyField(User,blank=True,related_name="followers")
+    coins = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.user.username)
