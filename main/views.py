@@ -58,7 +58,7 @@ def registerUser(request):
                 return redirect("/register")
         else:     
             register = RegisterForm()
-        return render(request,"register.html",{"register":register})
+        return render(request,"registerr.html",{"register":register})
 
 # def home(request,id,slug):
 #     if request.method == "POST":

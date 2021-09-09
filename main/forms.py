@@ -15,7 +15,7 @@ class RegisterForm(UserCreationForm):
             self.fields['username'].widget.attrs.update({'placeholder':('Username')})
             self.fields['email'].widget.attrs.update({'placeholder':('Email')})
             self.fields['password1'].widget.attrs.update({'placeholder':('Password')})        
-            self.fields['password2'].widget.attrs.update({'placeholder':('Repeat Password')})
+            self.fields['password2'].widget.attrs.update({'placeholder':('Re-enter Password')})
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:

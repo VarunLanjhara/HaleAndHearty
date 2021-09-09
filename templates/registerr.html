@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/loginn.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registerr.css' %}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
     <title>Login - HaleAndHearty</title>
 </head>
@@ -17,22 +18,29 @@
             {% csrf_token %}
           <div class="field">
             <span class="fa fa-user"></span>
-            <input type="text" required placeholder="Username" name = "username">
+            {{register.username }}
+          </div>
+          <div class="field-haha">
+            <i class="fas fa-envelope" style="margin-top: 13px;margin-left: 10px;"></i>
+            {{register.email}}
           </div>
           <div class="field space">
             <span class="fa fa-lock"></span>
-            <input type="password" class="pass-key" required placeholder="Password" name = "password">
+            {{register.password1 }}
             <span class="show">SHOW</span>
           </div>
-          <div class="pass">
-            <a href="#">Forgot Password?</a>
+          <div class="field space">
+            <span class="fa fa-lock"></span>
+            {{register.password2 }}
+            <span class="show">SHOW</span>
           </div>
-          <div class="field">
-            <input type="submit" value="Login">
+          <div class="g-recaptcha" data-sitekey="6LeNBC0cAAAAACVmoiJkb0eyii-uyFgC4D7vyCQ2" data-callback="enableBtn" style="margin-top: 10px;margin-bottom: 10px;"></div>
+          <div class="field" style="margin-bottom: 10px;">
+            <input type="submit" value="Register">
           </div>
         </form>
-        <div class="login">Or login with</div>
-        <div class="links">
+        <!-- <div class="login">Or register with</div> -->
+        <!-- <div class="links">
           <div class="github">
             <a href="{% url 'social:begin' 'github' %}" style="text-decoration: none;color: white;">
                 <i class="fab fa-github"><span>Github</span></i>
@@ -43,9 +51,9 @@
                 <i class="fab fa-google"></i><span class="noob">Google</span>
             </a>
           </div>
-        </div>
-        <div class="signup">Don't have an account?
-          <a href="{% url 'register' %}">Register</a>
+        </div> -->
+        <div class="signup">Already have an account?
+          <a href="{% url 'login' %}">Login</a>
         </div>
       </div>
     </div>
