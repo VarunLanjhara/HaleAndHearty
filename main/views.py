@@ -31,7 +31,7 @@ def loginUser(request):
                     return redirect("/")
                 else:
                     return redirect("/login")
-    return render(request,"login.html")
+    return render(request,"loginn.html")
 
 def registerUser(request):
     if request.user.is_authenticated:

@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
-    <title>Login - Idk</title>
+    <title>Login - HaleAndHearty</title>
 </head>
 <body>
     <div class="container">
         <form action="" method="POST">
             {% csrf_token %}
-            <h1 class="nameofwebsite">Idk Help :)</h1>
+            <img src="{% static 'images/logoboi.PNG' %}" alt="" width="240px" height="50px" style="cursor: pointer;margin-bottom: 30px;margin-left: 50px;margin-top: 10px;">
             <button class="github-login"><i class="fab fa-github"></i><a class="githublink" href="{% url 'social:begin' 'github' %}">Continue With Github</a></button>
             <button class="google-login"><i class="fab fa-google"></i><a class="googlelink" href="{% url 'social:begin' 'google-oauth2' %}">Continue With Google</a></button>
             <div class="orshit">

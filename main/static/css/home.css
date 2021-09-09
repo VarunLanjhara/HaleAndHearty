@@ -12,9 +12,8 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
-
 
 a{
     color: #282829;
@@ -54,11 +53,16 @@ a{
     display: flex;
     align-items: center;
     width: 550px;
+    border-radius: 999px;
     height: 34px;
     outline: none;
     border: 1px solid #535a604d;
     background-color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.searchdiv:hover{
+    border-color: black;
 }
 
 .searchdiv i{
@@ -69,7 +73,7 @@ a{
 }
 
 .searchh{
-    flex: 1;
+    flex: 0.9;
     border: none;
     outline: none;
     height: 31px;
@@ -82,13 +86,17 @@ a{
     font-size: 12px;
 }
 
+.authstuff{
+    margin-right: 50px;
+}
+
 .logbutton{
     border: transparent;
-    background-color: #0095ff;
+    background-color: #535A60;
     color: #39739d;
     height: 35px;
-    width: 75px;
-    border-radius: 4px;
+    width: 115px;
+    border-radius: 999px;
     cursor: pointer;
     border: 0 solid;
     box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
@@ -101,11 +109,10 @@ a{
 
 .regbutton{
     border: transparent;
-    background-color: #0095ff;
+    background-color: #535A60;
     color: #39739d;
     height: 35px;
-    width: 75px;
-    border-radius: 4px;
+    width: 115px;
     cursor: pointer;
     outline: 1px solid rgba(255, 255, 255, .5);
     border: 0 solid;
@@ -115,6 +122,7 @@ a{
     outline-offset: 0px;
     text-shadow: none;
     transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 999px;
 }
 
 .contact{
