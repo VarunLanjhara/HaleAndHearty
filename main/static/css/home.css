@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
 .navbarr{
     height: 50px;
@@ -1384,6 +1385,187 @@ a{
     margin-top: 14px;
     margin-left: 300px;
 }
+
+.reddemdivokbro{
+    height: 290px;
+    width: 1037px;
+    /* background-color: #fff; */
+    margin-top: 100px;
+    margin-left: 92px;
+}
+
+.reddemdivokbro .topdivhaha{
+    width: 445px;
+    height: 95px;
+}
+
+.reddemdivokbro .topdivhaha p{
+    font-size: 52px;
+    color: #fff;
+    font-family: 'Noto Sans';
+}
+
+.reddemdivokbro .middlestuff{
+    width: 560px;
+    height: 81px;
+    margin-top: 33px;
+}
+
+.reddemdivokbro button{
+    outline: none;
+    border: transparent;
+    border-radius: 9999px;
+    margin-top: 33px;
+    font-weight: bold;
+    padding: 4px 16px;
+    width: 235px;
+    height: 55px;
+    font-size: 18px;
+    background-color: #ddbd37;
+    color: #fff;
+}
+
+.reddemdivokbro .middlestuff p{
+    font-size: 18px;
+    color: #fff;
+    font-family: 'Noto Sans';
+}
+
+.reddemletsgoo{
+    width: 780px;
+    height: auto;
+    /* background-color: blue; */
+    margin-left: 284px;
+    margin-top: 283px;  
+}
+
+.reddemletsgoo .coinsfivehunder{
+    width: 780px;
+    height: 163px;
+    background-color: #fff;
+    margin-bottom: 40px;
+    border: 1px solid #dee0e1;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
+    cursor: pointer;
+}
+
+.reddemletsgoo .coinsonethousand{
+    width: 780px;
+    border: 1px solid #dee0e1;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
+    height: 163px;
+    background-color: #fff;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.reddemletsgoo .coinsthreethousand{
+    width: 780px;
+    height: 163px;
+    border: 1px solid #dee0e1;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
+    background-color: #fff;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.reddemletsgoo .coinsseventhousand{
+    width: 780px;
+    height: 163px;
+    background-color: #fff;
+    margin-bottom: 40px;
+    cursor: pointer;
+    border: 1px solid #dee0e1;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
+}
+
+.reddemletsgoo .coinsfivehunder p{
+    color: #0079d3;
+    font-family: 'Noto Sans';
+    font-size: 40px;
+    margin-left: 80px;
+    margin-top: 45px;
+}
+.reddemletsgoo .coinsonethousand p{
+    color: #0079d3;
+    font-family: 'Noto Sans';
+    font-size: 40px;
+    margin-left: 80px;
+    margin-top: 45px;
+}
+
+.reddemletsgoo .coinsthreethousand p{
+    color: #0079d3;
+    font-family: 'Noto Sans';
+    font-size: 40px;
+    margin-left: 80px;
+    margin-top: 45px;
+}
+
+.reddemletsgoo .coinsseventhousand p{
+    color: #0079d3;
+    font-family: 'Noto Sans';
+    font-size: 40px;
+    margin-left: 80px;
+    margin-top: 45px;
+}
+
+.reddemletsgoo .coinsfivehunder button{
+    outline: none;
+    box-shadow: none;
+    border: transparent;
+    background-color: #0079d3;
+    width: 173px;
+    height: 50px;
+    border-radius: 999px;
+    color: #Fff;
+    margin-left: 140px;
+    margin-top: 45px;
+}
+
+.reddemletsgoo .coinsthreethousand button{
+    outline: none;
+    box-shadow: none;
+    border: transparent;
+    background-color: #0079d3;
+    width: 173px;
+    height: 50px;
+    color: #Fff;
+    border-radius: 999px;
+    margin-left: 140px;
+    margin-top: 45px;
+}
+
+.reddemletsgoo .coinsonethousand button{
+    outline: none;
+    box-shadow: none;
+    border: transparent;
+    background-color: #0079d3;
+    width: 173px;
+    height: 50px;
+    border-radius: 999px;
+    color: #Fff;
+    margin-left: 140px;
+    margin-top: 45px;
+}
+
+.reddemletsgoo .coinsseventhousand button{
+    outline: none;
+    box-shadow: none;
+    border: transparent;
+    background-color: #0079d3;
+    width: 173px;
+    height: 50px;
+    color: #Fff;
+    border-radius: 999px;
+    margin-left: 140px;
+    margin-top: 45px;
+}
+
 
 @media (max-width : 1300px){
     .askingsidebar{

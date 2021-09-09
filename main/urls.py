@@ -23,5 +23,6 @@ urlpatterns = [
     path('posts/<int:post_pk>/<int:pk>/dislikes/',AddDislike.as_view(),name = "adddislikes"),
     path('posts/<int:pk>/save/',SavePost.as_view(),name = "save_post"),
     path("savedposts/",views.favouratelist,name = "saveposts"),
-    path('notifications/',views.notificationstuff,name = "notifications")
+    path('notifications/',views.notificationstuff,name = "notifications"),
+    path('redeem/',views.reddemcoins,name = "reddemcoins")
 ]

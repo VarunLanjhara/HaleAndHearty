@@ -389,3 +389,7 @@ def notificationstuff(request):
     user = request.user
     notification = Notifications.objects.filter(user = user).order_by("-date")
     return render(request,"notifications.html",{"notification":notification})
+
+
+def reddemcoins(request):
+    return render(request,"reddem.html")
