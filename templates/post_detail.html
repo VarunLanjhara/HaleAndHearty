@@ -180,9 +180,9 @@
     <div class="postdivgobrr" style="margin-top: 80px;">
         <div class="postdivheader">
             <img src="{{post.author.profile.image.url}}" alt="" width="36px" height="36px" class="postdivheaderimg">
-            <p class="postdivheadername">{{post.author}}</p>
+            <a href="{% url 'profile' post.author.pk %}"><p class="postdivheadername">{{post.author}}</p></a>
             <span>.</span>
-            <p class="postdivheaderfollow">Follow</p>
+            <a href="{% url 'profile' post.author.profile.pk %}"><p class="postdivheaderfollow">Follow</p></a>
             <p class="whenposted">Posted {{post.created|naturaltime}}</p>
         </div>
         <div class="titlestuff">
@@ -225,7 +225,7 @@
       <form action="" method="post">
           <div class="userdiv">
               <img src="{{request.user.profile.image.url}}" alt="">
-              <p>{{request.user}}</p>
+              <a href="{% url 'profile' user.profile.pk %}"><p>{{request.user}}</p></a>
           </div>
           {% csrf_token %}
           {{form.media}}
@@ -248,9 +248,9 @@
     <div class="postanswersdiv">
         <div class="topstuff">
             <img src="{{comment.user.profile.image.url}}" width="36px" height="36px" alt="">
-            <p class="username">{{comment.user}}</p>
+            <a href="{% url 'profile' comment.user.profile.pk %}"><p class="username">{{comment.user}}</p></a>
             <span>.</span>
-            <p class="followshit">Follow</p>
+            <a href="{% url 'profile' comment.user.profile.pk %}"><p class="followshit">Follow</p></a>
             <p class="whenanswered">Answered {{comment.commented|naturaltime}}</p>
         </div>
         <div class="bodystuff">

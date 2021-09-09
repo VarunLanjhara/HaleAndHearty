@@ -159,7 +159,11 @@
                     <img src="{{post.author.profile.image.url}}" alt="" width="36px" height="36px" class="postdivheaderimg">
                     <a href="{% url 'profile' post.author.pk %}"><p class="postdivheadername">{{post.author}}</p></a>
                     <span>.</span>
-                    <a href="{% url 'profile' post.author.pk %}"><p class="postdivheaderfollow">Follow</p></a>
+                    {% if post.author.profile.followers %}  
+                        <a href="{% url 'profile' post.author.pk %}"><p class="postdivheaderfollow">Follow</p></a>
+                    {% else %}
+                    <a href="{% url 'profile' post.author.pk %}"><p class="postdivheaderfollow">UnFollow</p></a>
+                    {% endif %}
                     <p class="whenposted">Posted {{post.created|naturaltime}}</p>
                 </div>
                 <div class="titlestuff">

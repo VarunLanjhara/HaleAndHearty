@@ -52,9 +52,13 @@ def registerUser(request):
                 if register.is_valid():
                     register.save()
                     username = register.cleaned_data.get("username")
+                    messages.success(request,f"{username} Your Account Created Succesfully")
                     return redirect("/login")
+                else:
+                    messages.warning(request,f"{register.errors}")
+                    return redirect("/register")
             else:
-                print("Verify I Am Not A Robot")
+                messages.warning(request,"Fill Recaptcha")
                 return redirect("/register")
         else:     
             register = RegisterForm()
@@ -153,14 +157,11 @@ class Profilee(View,LoginRequiredMixin):
     #     username = self.kwargs.get("username")
     #     return get_object_or_404(User,username = username)
 
-class PostListView(View):
-    def get(self,request,*args,**kwargs):
-        posts = Post.objects.all()
-        posts.order_by("-created")
-        context = {
-            "posts":posts,
-        }
-        return render(request,"home.html",context)
+class PostListView(ListView,LoginRequiredMixin):
+    model = Post 
+    template_name = "home.html"
+    context_object_name = "posts"
+    ordering = ['-created']
 
     def post(self,request):
         name = request.POST.get("name")
@@ -170,7 +171,7 @@ class PostListView(View):
         contact.save()
         return redirect("/")
 
-class PostDetailview(View):
+class PostDetailview(View,LoginRequiredMixin):
     def get(self,request,pk,*args,**kwargs):
         post = Post.objects.get(pk=pk)
         form = CommentForm()
@@ -229,7 +230,6 @@ class PostDetailview(View):
 class PostCreateView(CreateView,LoginRequiredMixin):
     model = Post
     fields = ["title","body"]
-    context_object_name = "create"
     template_name = "askquestion.html"
     success_url = reverse_lazy("home")
 
@@ -237,20 +237,18 @@ class PostCreateView(CreateView,LoginRequiredMixin):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class PostUpdateView(UpdateView,UserPassesTestMixin,LoginRequiredMixin):
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Post
     fields = ["title","body"]
-    context_object_name = "create"
     template_name = "askquestion.html"
     success_url = reverse_lazy("home")
-    queryset = Post.objects.all()
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
-        post = Post.objects.all()
+        post = self.get_object()
         if self.request.user == post.author:
             return True
         return False
@@ -260,19 +258,17 @@ class PostUpdateView(UpdateView,UserPassesTestMixin,LoginRequiredMixin):
     #     return get_object_or_404(Post,title = title)
 
 
-class PostDeleteView(DeleteView,UserPassesTestMixin,LoginRequiredMixin):
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Post
     success_url = reverse_lazy("home")
     template_name = "post_delete.html"
-    queryset = Post.objects.all()
 
     def test_func(self):
         post = self.get_object()
-        return self.request.user == post.author;
+        if self.request.user == post.author:
+            return True
+        return False
 
-    # def get_object(self):
-    #     title = self.kwargs.get("title")
-    #     return get_object_or_404(Post,title = title)
 class AddFollower(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
