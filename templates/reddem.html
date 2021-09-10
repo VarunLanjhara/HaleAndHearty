@@ -54,19 +54,19 @@
                         </a>
                     </div>
                     <div class="coinsthing">
-                        <a href="" style="color: black !important;">
+                        <a href="{% url 'notifications' %}" style="color: black !important;">
                             <i class="fas fa-bell"></i>
                             <p style="position: relative;bottom: 30px;left: 10px;">Notifications</p>
                         </a>
                     </div>
                     <div class="yourcontent">
-                        <a href="" style="color: black !important;">
+                        <a href="{% url 'reddemcoins' %}" style="color: black !important;">
                             <i class="fas fa-gift"></i>
                             <p style="position: relative;bottom: 30px;left: 10px;">Redeem Coins</p>
                         </a>
                     </div>
                     <div class="leaderboard">
-                        <a href="" style="color: black !important;">
+                        <a href="{% url 'saveposts' %}" style="color: black !important;">
                             <i class="fas fa-save"></i>
                             <p style="position: relative;bottom: 30px;left: 10px;">Saved Posts</p>
                         </a>
@@ -129,17 +129,18 @@
 
       <div class="reddemdivokbro">
           <div class="topdivhaha">
-              <p style="color: black !important;position: relative;top: 120px;">Coins Redeem</p>
+              <p style="color: black !important;position: relative;top: 120px;">Redeem Coins</p>
           </div>
           <div class="middlestuff">
-              <p style="color: black !important;margin-top:130px;">Coins are a virtual good you can use to award exemplary posts or comments. Support Reddit and encourage your favorite contributors to keep making Reddit better.</p>
+              <p style="color: black !important;margin-top:130px;">Yay! You could redeem the reward coins that you secured with the upvotes(on your answers) from the Hale&Hearty community.
+                Happy Answering! .</p>
           </div>
           <a href="#reddemletsgoo"><button style="background-color: #535A60;">Redeem Coins</button></a>
       </div>
 
       </div>
 
-      <div class="reddemletsgoo" id = "reddemletsgoo" style="position: relative;bottom: 360px;">
+      <div class="reddemletsgoo" id = "reddemletsgoo" style="position: absolute;top: 450px;">
           <div class="coinsfivehunder" style="display: flex;">
             <img src="{% static 'images/coinbg.jpg' %}" alt="" width="256px" height="146px">
             <p>$1.00</p>
@@ -331,7 +332,6 @@
 <script>
     $(window).load(function() {
     $(".preloader").delay(1000).fadeOut("slow");
-    // $("#overlayer").delay(5000).fadeOut("slow");
     })
 </script>
 </body>
