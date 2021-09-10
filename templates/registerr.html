@@ -70,6 +70,36 @@
     {% endfor %}
   {% endif %}
 
+  <<div class="preloader">
+    
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ripple" style="background:0 0"><circle cx="50" cy="50" r="4.719" fill="none" stroke="#1d3f72" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="-1.5s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="-1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="27.591" fill="none" stroke="#5699d2" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="0s" repeatCount="indefinite"/></circle></svg>
+    
+  </div>
+
+    <style>
+        .preloader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background: rgb(23, 22, 22);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            transition: opacity 0.3s linear;
+        }
+    </style>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script>
+    $(window).load(function() {
+    $(".preloader").delay(1000).fadeOut("slow");
+    // $("#overlayer").delay(5000).fadeOut("slow");
+    })
+</script>
+
     <script type="text/javascript">
         
       const pass_field = document.querySelector('.pass-key');

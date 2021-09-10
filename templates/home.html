@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Home - HaleAndHearty</title>
 </head>
 
@@ -263,6 +264,36 @@
         </div>
       </div>
 
+      <div class="preloader">
+    
+        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ripple" style="background:0 0"><circle cx="50" cy="50" r="4.719" fill="none" stroke="#1d3f72" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="-1.5s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="-1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="27.591" fill="none" stroke="#5699d2" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="0s" repeatCount="indefinite"/></circle></svg>
+        
+      </div>
+
+        <style>
+            .preloader {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 100%;
+                background: rgb(23, 22, 22);
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 9999;
+                transition: opacity 0.3s linear;
+            }
+        </style>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script>
+        $(window).load(function() {
+        $(".preloader").delay(1000).fadeOut("slow");
+        // $("#overlayer").delay(5000).fadeOut("slow");
+        })
+    </script>
+
 
     {% else %}
 
@@ -353,6 +384,36 @@
               </div>
             </div>
           </div>
+
+          <div class="preloader">
+    
+            <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ripple" style="background:0 0"><circle cx="50" cy="50" r="4.719" fill="none" stroke="#1d3f72" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="-1.5s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="-1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="27.591" fill="none" stroke="#5699d2" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="0s" repeatCount="indefinite"/></circle></svg>
+            
+          </div>
+    
+            <style>
+                .preloader {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    width: 100%;
+                    background: rgb(23, 22, 22);
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    z-index: 9999;
+                    transition: opacity 0.3s linear;
+                }
+            </style>
+    
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script>
+            $(window).load(function() {
+            $(".preloader").delay(1000).fadeOut("slow");
+            // $("#overlayer").delay(5000).fadeOut("slow");
+            })
+        </script>
 
           <div class="picturestuff" style="overflow-x: hidden;">
               <h1
