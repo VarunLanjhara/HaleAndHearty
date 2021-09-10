@@ -14,7 +14,7 @@ class Contact(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    image = models.ImageField(default="default.png",upload_to = "profile_pics")
+    image = models.ImageField(default="default.PNG",upload_to = "profile_pics")
     about = models.TextField(default="I am nerd")
     location = models.CharField(max_length=100)
     usercreated = models.DateTimeField(default=now)
