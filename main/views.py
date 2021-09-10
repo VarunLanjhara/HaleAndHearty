@@ -129,7 +129,7 @@ class PasswordResetVieww(PasswordResetView):
 class Profilee(View,LoginRequiredMixin):
     def get(self,request,pk):
         profile = Profile.objects.get(pk=pk)
-        comment = Comment.objects.get(pk = pk)
+        comment = Comment.objects.all()
         user = profile.user
         posts = Post.objects.filter(author=user).order_by('-created')
         followers = profile.followers.all()
