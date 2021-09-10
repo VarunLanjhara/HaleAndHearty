@@ -327,7 +327,7 @@
             </div>
             <div class="searchdiv">
                 <i class="fas fa-search"></i>
-                <input type="search" class="searchh" placeholder="Search...">
+                <input type="search" class="searchh" placeholder="Search..." onclick="redirecttologin()">
             </div>
             <!-- <div class="form-check form-switch divofshit">
                 <input class="form-check-input" type="checkbox">
@@ -592,6 +592,10 @@
                     document.getElementById("iconofdrop").classList.remove("fa-times")
                     document.getElementById("iconofdrop").classList.add("fa-bars")
                 }
+            }
+
+            function redirecttologin(){
+                window.location.href = "/login"
             }
 
         </script>

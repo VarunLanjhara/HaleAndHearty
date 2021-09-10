@@ -365,3 +365,6 @@ def about(request):
         return render(request,"about.html")
     else:
         return redirect("/#about")
+
+def search(request):
+    return HttpResponse("Bhv")
