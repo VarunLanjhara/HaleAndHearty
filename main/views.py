@@ -64,98 +64,65 @@ def registerUser(request):
             register = RegisterForm()
         return render(request,"registerr.html",{"register":register})
 
-# def home(request,id,slug):
-#     if request.method == "POST":
-#         name = request.POST["name"]
-#         email = request.POST["email"]
-#         message = request.POST["message"]
-#         contact = Contact(name=name,email=email,message=message)
-#         contact.save()
-#     else:
-#         profile = Profile.objects.all()
-#         followers = profile.followers.all()
-#         numberoffollowers = len(followers)
-#         for follower in followers:
-#             if follower == request.user:
-#                 isfollowing = True
-#             else:
-#                 isfollowing = False
-#         post = get_object_or_404(Post,id = id,slug = slug)
-#         if post.save.filer(id = request.user.id).exists():
-#             issave = True;
-#         context = {
-#             "numberoffollowers":numberoffollowers,
-#             "followers":followers,
-#             "isfollowing":isfollowing,
-#             "issave":issave
-#         }
-#         return render(request,"home.html",context)
-
-# def save_post(self,request,pk):
-#     post = Post.objects.get(pk = pk)
-#     if post.save.filter(pk = request.user.pk).exists():
-#         post.save.remove(request.user)
-#     else:
-#         post.save.add(request.user)
-#     return HttpResponse("/")
-
 def logoutUser(request):
     logout(request)
     return redirect('/login')
 
 def update_profile(request):
-    if request.method == "POST":
-        u_form = UserUpdateForm(request.POST ,instance = request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES , instance = request.user.profile)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            u_form = UserUpdateForm(request.POST ,instance = request.user)
+            p_form = ProfileUpdateForm(request.POST, request.FILES , instance = request.user.profile)
 
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            return redirect(f"/profile/{request.user.pk}")
-        else:
-            return redirect("update_profile")
-    else: 
-        u_form = UserUpdateForm(instance = request.user)
-        p_form = ProfileUpdateForm(instance = request.user.profile)
-    context = {
-        "u_form" : u_form,
-        "p_form" : p_form
-    }
-    return render(request,"update_profile.html",context)
+            if u_form.is_valid() and p_form.is_valid():
+                u_form.save()
+                p_form.save()
+                return redirect(f"/profile/{request.user.pk}")
+            else:
+                return redirect("update_profile")
+        else: 
+            u_form = UserUpdateForm(instance = request.user)
+            p_form = ProfileUpdateForm(instance = request.user.profile)
+        context = {
+            "u_form" : u_form,
+            "p_form" : p_form
+        }
+        return render(request,"update_profile.html",context)
+    else:
+        return redirect("/")
 
 class PasswordResetVieww(PasswordResetView):
     template_name = "reset/password_reset.html"
 
 class Profilee(View,LoginRequiredMixin):
     def get(self,request,pk):
-        profile = Profile.objects.get(pk=pk)
-        comment = Comment.objects.all()
-        user = profile.user
-        posts = Post.objects.filter(author=user).order_by('-created')
-        followers = profile.followers.all()
-        number_of_followers = len(followers)
-        if len(followers) == 0:
-            is_following = False
-        for follower in followers:
-            if follower == request.user:
-                is_following = True
-                break
-            else:
+        if request.user.is_authenticated:
+            profile = Profile.objects.get(pk=pk)
+            comment = Comment.objects.all()
+            user = profile.user
+            posts = Post.objects.filter(author=user).order_by('-created')
+            followers = profile.followers.all()
+            number_of_followers = len(followers)
+            if len(followers) == 0:
                 is_following = False
+            for follower in followers:
+                if follower == request.user:
+                    is_following = True
+                    break
+                else:
+                    is_following = False
 
-        context = {
-            "profile":profile,
-            'user':user, 
-            'comment':comment,
-            'posts':posts,
-            'number_of_followers': number_of_followers,
-            'is_following': is_following,
-        }
-        return render(request,"profile.html",context)
-
-    # def get_object(self):
-    #     username = self.kwargs.get("username")
-    #     return get_object_or_404(User,username = username)
+            context = {
+                "profile":profile,
+                'user':user, 
+                'comment':comment,
+                'posts':posts,
+                'number_of_followers': number_of_followers,
+                'is_following': is_following,
+            }
+            return render(request,"profile.html",context)
+        else:
+            return redirect("/")
 
 class PostListView(ListView,LoginRequiredMixin):
     model = Post 
@@ -173,22 +140,25 @@ class PostListView(ListView,LoginRequiredMixin):
 
 class PostDetailview(View,LoginRequiredMixin):
     def get(self,request,pk,*args,**kwargs):
-        post = Post.objects.get(pk=pk)
-        form = CommentForm()
-        commentss = Comment.objects.filter(post=post)
-        numberofcomments = len(commentss)
-        
+        if request.user.is_authenticated:
+            post = Post.objects.get(pk=pk)
+            form = CommentForm()
+            commentss = Comment.objects.filter(post=post)
+            numberofcomments = len(commentss)
+            
 
-        comments = Comment.objects.filter(post=post).order_by('-commented')
+            comments = Comment.objects.filter(post=post).order_by('-commented')
 
-        context = {
-            "form":form,
-            "post":post,
-            'comments':comments,
-            'numberofcomments':numberofcomments
-        }
+            context = {
+                "form":form,
+                "post":post,
+                'comments':comments,
+                'numberofcomments':numberofcomments
+            }
 
-        return render(request,"post_detail.html",context)
+            return render(request,"post_detail.html",context)
+        else:
+            return redirect("/")
 
     def post(self,request,pk,*args,**kwargs):
         post = Post.objects.get(pk=pk)
@@ -216,19 +186,9 @@ class PostDetailview(View,LoginRequiredMixin):
         return render(request,"post_detail.html",context)
 
 
-    # def post(self,request):
-    #     comment = request.POST.get("comment")
-    #     user = request.user
-    #     postid = request.POST.get("postid")
-    #     post = Post.objects.get(id = postid)
-
-    #     answer = Answer(comment = comment,user = user,post= post)
-    #     answer.save()
-    #     return redirect("/")
-
-
-class PostCreateView(CreateView,LoginRequiredMixin):
+class PostCreateView(LoginRequiredMixin,CreateView):
     model = Post
+    login_url = "/"
     fields = ["title","body"]
     template_name = "askquestion.html"
     success_url = reverse_lazy("home")
@@ -252,10 +212,6 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         if self.request.user == post.author:
             return True
         return False
-
-    # def get_object(self):
-    #     title = self.kwargs.get("title")
-    #     return get_object_or_404(Post,title = title)
 
 
 class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
@@ -295,8 +251,6 @@ class AddLikes(View):
                 break
 
         if isdisliked:
-            # comment.user.profile.coins += 1
-            # comment.user.profile.save()
             comment.dislikes.remove(request.user)
 
         isliked = False
@@ -307,12 +261,8 @@ class AddLikes(View):
                 break
 
         if not isliked:
-            # comment.user.profile.coins += 1
-            # comment.user.profile.save()
             comment.likes.add(request.user)
         if isliked:
-            # comment.user.profile.coins -= 1
-            # comment.user.profile.save()
             comment.likes.remove(request.user)
 
         likesoncommnet = comment.likes.count() - comment.dislikes.count()
@@ -334,8 +284,6 @@ class AddDislike(View):
                 break
 
         if isliked:
-            # comment.user.profile.coins -= 1
-            # comment.user.profile.save() 
             comment.likes.remove(request.user)
 
         isdisliked = False
@@ -346,12 +294,8 @@ class AddDislike(View):
                 break
 
         if not isdisliked:
-            # comment.user.profile.coins -= 1
-            # comment.user.profile.save()
             comment.dislikes.add(request.user)
         if isdisliked:
-            # comment.user.profile.coins += 1
-            # comment.user.profile.save()
             comment.dislikes.remove(request.user)
         
         likesoncommnet = comment.likes.count() - comment.dislikes.count()
@@ -378,17 +322,29 @@ class SavePost(View):
         return redirect(f'/posts/{post.pk}')
 
 def favouratelist(request):
-    haha = Post.objects.filter(favourite = request.user)
-    return render(request,"favouritelist.html",{"haha":haha})
+    if request.user.is_authenticated:
+        haha = Post.objects.filter(favourite = request.user)
+        return render(request,"favouritelist.html",{"haha":haha})
+    else:
+        return redirect("/")
 
 def notificationstuff(request):
-    user = request.user
-    notification = Notifications.objects.filter(user = user).order_by("-date")
-    return render(request,"notifications.html",{"notification":notification})
+    if request.user.is_authenticated:
+        user = request.user
+        notification = Notifications.objects.filter(user = user).order_by("-date")
+        return render(request,"notifications.html",{"notification":notification})
+    else:
+        return redirect("/")
 
 
 def reddemcoins(request):
-    return render(request,"reddem.html")
+    if request.user.is_authenticated:
+        return render(request,"reddem.html")
+    else:
+        return redirect("/")
 
 def about(request):
-    return render(request,"about.html")
+    if request.user.is_authenticated:
+        return render(request,"about.html")
+    else:
+        return redirect("/#about")

@@ -270,7 +270,7 @@ a{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     display: none;
     opacity: 1;
-    animation-name: slideIn;
+    animation-name: zoomInUp;
     animation-duration: 0.4s;
 }
 
@@ -1165,9 +1165,26 @@ a{
     left: 342px;
     margin-top: 20px;
     display: none;
-    animation-name: slideIn;
+    animation-name: zoomInUp;
     animation-duration: 0.8s;
 }
+
+@keyframes zoomInUp {
+    0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.1, .1, .1) translate3d(0, 1000px, 0);
+    transform: scale3d(.1, .1, .1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    }
+    60% {
+    opacity: 1;
+    -webkit-transform: scale3d(.475, .475, .475) translate3d(0, -60px, 0);
+    transform: scale3d(.475, .475, .475) translate3d(0, -60px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    }
+    } 
 
 .postcommentdiv .buttonstuffhere{
     width: 572px;
