@@ -139,8 +139,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "lanjharav@gmail.com"
-EMAIL_HOST_PASSWORD = "vk1923v19kum"
+EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASS")
 
 SOCIAL_AUTH_GITHUB_KEY = "d94905ca7eb4218a1872"
 SOCIAL_AUTH_GITHUB_SECRET = "532afe9f102f082077def5f515134012493d1ffb"

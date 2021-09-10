@@ -1056,3 +1056,23 @@ a{
         margin-right: 10px;
     }
 }
+
+
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #6b6b6b #ffffff;
+  }
+
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #6b6b6b;
+    border-radius: 12px;
+    border: 3px solid #ffffff;
+  }
