@@ -1597,6 +1597,18 @@ a{
     border-right: 2px solid black;
 }
 
+.movingtetitisok{
+    font-family: 'Poppins','Source Sans Pro','sans-serif';
+    width: 0ch;
+    animation: shit 5s steps(18) infinite;
+    border-right: 2px solid black;
+    font-size: 20px;
+    overflow: hidden;
+    position: relative;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
 .askquestionimage{
     position: absolute;
     left: 850px;
@@ -1615,6 +1627,16 @@ a{
     }
     50%{
         width: 26ch;
+    }
+}
+
+
+@keyframes shit{
+    0%{
+        width: 0ch;
+    }
+    50%{
+        width: 18ch;
     }
 }
 

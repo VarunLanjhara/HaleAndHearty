@@ -389,3 +389,6 @@ def notificationstuff(request):
 
 def reddemcoins(request):
     return render(request,"reddem.html")
+
+def about(request):
+    return render(request,"about.html")

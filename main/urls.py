@@ -24,5 +24,6 @@ urlpatterns = [
     path('posts/<int:pk>/save/',SavePost.as_view(),name = "save_post"),
     path("savedposts/",views.favouratelist,name = "saveposts"),
     path('notifications/',views.notificationstuff,name = "notifications"),
-    path('redeem/',views.reddemcoins,name = "reddemcoins")
+    path('redeem/',views.reddemcoins,name = "reddemcoins"),
+    path('aboutus/',views.about,name = "about")
 ]

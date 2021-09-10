@@ -83,7 +83,9 @@
                         <p data-bs-toggle="modal" data-bs-target="#contact" onclick="usernav()">Contact Us</p>
                     </div>
                     <div class="about">
+                        <a href="{% url 'about' %}">
                         <p onclick="usernav()">About Us</p>
+                        </a>
                     </div>
                     <div class="logout">
                         <p><a href="/logout" style="color: black !important;">Logout</a></p>
@@ -327,8 +329,10 @@
                 <div class="navbar-dropdownshit" id = "navbar-active">
                     <a href="" onclick="showdrop()" class="iamlinkbruh">
                         <div class="about-navbarhaha">
-                            <i class="fas fa-user-alt"></i>
-                            <p>About Us</p>
+                            <a href="{% url 'about' %}">
+                                <i class="fas fa-user-alt"></i>
+                                <p>About Us</p>
+                            </a>
                         </div>
                     </a>
                     <a href="" onclick="showdrop()" class="iamlinkbruh" data-bs-toggle="modal" data-bs-target="#contact">
