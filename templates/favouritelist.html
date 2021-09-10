@@ -152,15 +152,23 @@
 
 </div>
 
-<div class="useraskquestiontop">
-    <!-- <a href="{% url 'ask_question' %}"> -->
-        <div class="top">
-            <img src="{{request.user.profile.image.url}}" alt="" width="28px" height="28px">
-            <p>{{request.user}}</p>
-        </div>
-        <h3>{{request.user}} Your Saved Posts :)</h3>
-    <!-- </a> -->
-  </div>
+<div style="background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('../media/profile_pics/behindstuff.jpg');
+        height: 100vh;
+        background-size: cover;
+        position: relative;
+        bottom: 122px;
+        background-position: center;">
+
+        <p style="margin-top: 80px;color: #282829;font-size: 17px;line-height: 21px;margin-left: 351px;font-weight: bold;font-size: 26px;
+        font-family: 'Source Sans Pro';
+        width: 600px;
+        height: 34px;
+        font-weight: bolder;
+        line-height: 22px;
+        color: #1c1c1c;
+        position: relative;
+        top: 20px;">Your Saved Posts</p>
+        <hr width="517px" style="position: relative;left: 351px;color: #636466;">
 
     {% for post in haha %}
     {% if post %}
@@ -173,7 +181,7 @@
                 <p class="whenposted">Posted {{post.created|naturaltime}}</p>
             </div>
             <div class="titlestuff">
-                <a href="{% url 'post_detail' post.pk %}" target="_blank">
+                <a href="{% url 'post_detail' post.pk %}" target="_blank" style="color: black !important;">
                     {{post.title}}
                 </a>
             </div>
@@ -213,6 +221,8 @@
         </div>
     {% endif %}
     {% endfor %}
+
+</div>
 
   <div class="modal fade" id="modalofreport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
