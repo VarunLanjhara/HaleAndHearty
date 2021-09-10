@@ -30,48 +30,53 @@
             <a href="{% url 'saveposts' %}"><i class="fas fa-save" data-bs-toggle="tooltip" title = "Saved Posts"></i></a>
         </div>
         <div class="userdiv">
-            <img src="{{request.user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
+            <img src="{{user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
             <i class="fas fa-angle-down" onclick="usernav()"></i>
             <div class="divofuserthings" id = "navbar-user">
                 <a href="{% url 'profile' user.pk %}" target="_blank" onclick="usernav()">
                     <div class="upperpart">
-                        <img src="{{request.user.profile.image.url}}" alt="">
-                        <h3>{{request.user}}</h3>
-                        <i class="fas fa-chevron-right"></i>
-                        <hr>
+                            <img src="{{request.user.profile.image.url}}" alt="">
+                            <h3>{{request.user}}</h3>
+                            <i class="fas fa-chevron-right"></i>
+                            <hr>
                     </div>
                 </a>
                 <div class="middlepart">
-                    <div class="askquestions">
-                        <i class="fas fa-question"></i>
-                        <p>Ask Questions</p>
+                    <div class="askquestions" data-bs-toggle="modal" data-bs-target="#postcreate" onclick="usernav()">
+                        <a href="{% url 'ask_question' %}" style="color: black !important;">
+                            <i class="fas fa-question"></i>
+                            <p style="position: relative;bottom: 30px;left: 10px;">Ask Questions</p>
+                        </a>
                     </div>
                     <div class="coinsthing">
-                        <i class="fas fa-coins"></i>
-                        <p>Coins</p>
+                        <a href="" style="color: black !important;">
+                            <i class="fas fa-bell"></i>
+                            <p style="position: relative;bottom: 30px;left: 10px;">Notifications</p>
+                        </a>
                     </div>
                     <div class="yourcontent">
-                        <i class="fas fa-book"></i>
-                        <p>Your Content</p>
+                        <a href="" style="color: black !important;">
+                            <i class="fas fa-gift"></i>
+                            <p style="position: relative;bottom: 30px;left: 10px;">Redeem Coins</p>
+                        </a>
                     </div>
                     <div class="leaderboard">
-                        <i class="far fa-chart-bar"></i>
-                        <p>Leaderboard</p>
+                        <a href="" style="color: black !important;">
+                            <i class="fas fa-save"></i>
+                            <p style="position: relative;bottom: 30px;left: 10px;">Saved Posts</p>
+                        </a>
                     </div>
                     <hr>
                 </div>
                 <div class="lastpart">
                     <div class="contact">
-                        <p data-bs-toggle="modal" data-bs-target="#contact" onclick="usernav()">Contact</p>
+                        <p data-bs-toggle="modal" data-bs-target="#contact" onclick="usernav()">Contact Us</p>
                     </div>
                     <div class="about">
-                        <p>About</p>
-                    </div>
-                    <div class="help">
-                        <p>Help</p>
+                        <p onclick="usernav()">About Us</p>
                     </div>
                     <div class="logout">
-                        <p><a href="/logout">Logout</a></p>
+                        <p><a href="/logout" style="color: black !important;">Logout</a></p>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 {% load static %}
 {% load social_share %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{user.profile}} - Idk</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 </head>
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
 <body>
     <header class="navbarr">
         <div class="logo">
@@ -30,48 +37,53 @@
             <a href="{% url 'saveposts' %}"><i class="fas fa-save" data-bs-toggle="tooltip" title = "Saved Posts"></i></a>
         </div>
         <div class="userdiv">
-            <img src="{{request.user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
+            <img src="{{user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
             <i class="fas fa-angle-down" onclick="usernav()"></i>
             <div class="divofuserthings" id = "navbar-user">
                 <a href="{% url 'profile' user.pk %}" target="_blank" onclick="usernav()">
                     <div class="upperpart">
-                        <img src="{{request.user.profile.image.url}}" alt="">
-                        <h3>{{request.user}}</h3>
-                        <i class="fas fa-chevron-right"></i>
-                        <hr>
+                            <img src="{{request.user.profile.image.url}}" alt="">
+                            <h3>{{request.user}}</h3>
+                            <i class="fas fa-chevron-right"></i>
+                            <hr>
                     </div>
                 </a>
                 <div class="middlepart">
-                    <div class="askquestions">
-                        <i class="fas fa-question"></i>
-                        <p>Ask Questions</p>
+                    <div class="askquestions" data-bs-toggle="modal" data-bs-target="#postcreate" onclick="usernav()">
+                        <a href="{% url 'ask_question' %}" style="color: black !important;">
+                            <i class="fas fa-question"></i>
+                            <p style="position: relative;bottom: 30px;left: 10px;">Ask Questions</p>
+                        </a>
                     </div>
                     <div class="coinsthing">
-                        <i class="fas fa-coins"></i>
-                        <p>Coins</p>
+                        <a href="" style="color: black !important;">
+                            <i class="fas fa-bell"></i>
+                            <p style="position: relative;bottom: 30px;left: 10px;">Notifications</p>
+                        </a>
                     </div>
                     <div class="yourcontent">
-                        <i class="fas fa-book"></i>
-                        <p>Your Content</p>
+                        <a href="" style="color: black !important;">
+                            <i class="fas fa-gift"></i>
+                            <p style="position: relative;bottom: 30px;left: 10px;">Redeem Coins</p>
+                        </a>
                     </div>
                     <div class="leaderboard">
-                        <i class="far fa-chart-bar"></i>
-                        <p>Leaderboard</p>
+                        <a href="" style="color: black !important;">
+                            <i class="fas fa-save"></i>
+                            <p style="position: relative;bottom: 30px;left: 10px;">Saved Posts</p>
+                        </a>
                     </div>
                     <hr>
                 </div>
                 <div class="lastpart">
                     <div class="contact">
-                        <p data-bs-toggle="modal" data-bs-target="#contact" onclick="usernav()">Contact</p>
+                        <p data-bs-toggle="modal" data-bs-target="#contact" onclick="usernav()">Contact Us</p>
                     </div>
                     <div class="about">
-                        <p>About</p>
-                    </div>
-                    <div class="help">
-                        <p>Help</p>
+                        <p onclick="usernav()">About Us</p>
                     </div>
                     <div class="logout">
-                        <p><a href="/logout">Logout</a></p>
+                        <p><a href="/logout" style="color: black !important;">Logout</a></p>
                     </div>
                 </div>
             </div>
@@ -138,10 +150,8 @@
             <hr class="underprofilestuff">
             <div class="stuff">
                 <a href="" class="profile">Profile</a>
-                <a href="">{{posts.count}} Answers</a>
                 <a href="">{{posts.count}} Questions</a>
                 <a href="">{{number_of_followers}} Followers</a>
-                <a href="">0 Following</a>
             </div>
             <hr class="stuffunder">
             <div class="sidebarstuff">
@@ -153,6 +163,63 @@
                 <a href="{% url 'home' %}"><i class="fas fa-plus"></i></a>
             </div>
       </div>
+
+
+      {% for post in posts %}
+        {% if post %}
+          <div class="postdivgobrr">
+                <div class="postdivheader">
+                    <img src="{{post.author.profile.image.url}}" alt="" width="36px" height="36px" class="postdivheaderimg">
+                    <a href="{% url 'profile' post.author.pk %}"><p class="postdivheadername">{{post.author}}</p></a>
+                    <span>.</span>
+                    {% if post.author.profile.followers %}  
+                        <a href="{% url 'profile' post.author.pk %}"><p class="postdivheaderfollow">Follow</p></a>
+                    {% else %}
+                    <a href="{% url 'profile' post.author.pk %}"><p class="postdivheaderfollow">UnFollow</p></a>
+                    {% endif %}
+                    <p class="whenposted">Posted {{post.created|naturaltime}}</p>
+                </div>
+                <div class="titlestuff" style="cursor: pointer;">
+                    <a href="{% url 'post_detail' post.pk %}" target="_blank" style="cursor: pointer;color: #282829;">
+                        {{post.title}}
+                    </a>
+                </div>
+                <div class="bodystuff">
+                    {{post.body|safe}}
+                    <hr class="laststuffunder">
+                </div>
+                <div class="bottom-stuff">
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <div class="answer-field">
+                            <i class="far fa-edit"></i>
+                            <span class="answer">Answer</span>
+                        </div>
+                    </a>
+                    <a>
+                        <a href="{% url 'post_detail' post.pk %}">
+                            <div class="save-field">
+                                <i class="far fa-save"></i>
+                                <span class="save">Save</span>
+                            </div>
+                        </a>
+                    </a>
+                    <div class="report-field" data-bs-toggle="modal" data-bs-target="#modalofreport">
+                        <i class="far fa-flag"></i>
+                        <span class="report">Report</span>
+                    </div>
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <div class="share-field">
+                            <i class="far fa-share-square" data-bs-toggle="tooltip" title="Share"></i>
+                            <span class="share">Share</span>
+                        </div>
+                    </a>
+                    {% if request.user == post.author %}
+                        <i class="fas fa-ellipsis-h"></i>
+                    {% endif %}
+                </div>
+          </div>
+        {% endif %}
+      {% endfor %}
 
 
       <!-- share div stuff here  -->
