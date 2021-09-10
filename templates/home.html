@@ -153,6 +153,15 @@
 
       </div>
 
+      {% for messages in messages %}
+      {% if messages %}
+        <div class="alert alert-{{messages.tags}} alert-dismissible fade show" style="position: relative;top: 5px;width: 50%;left: 650px;" role="alert">
+            {{messages}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endif %}
+    {% endfor %}
+
       <div class="useraskquestiontop">
         <a href="{% url 'ask_question' %}">
             <div class="top">

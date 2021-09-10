@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{user.profile}} - Idk</title>
+    <title>{{user.profile}} - HaleAndHearty</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
@@ -122,6 +122,15 @@
           </div>
         </div>
       </div>
+
+      {% for messages in messages %}
+      {% if messages %}
+        <div class="alert alert-{{messages.tags}} alert-dismissible fade show" style="position: relative;top: 60px;width: 50%;left: 650px;" role="alert">
+            {{messages}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endif %}
+    {% endfor %}
 
 
       <div class="userprofilestuff">

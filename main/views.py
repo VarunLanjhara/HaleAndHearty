@@ -15,6 +15,7 @@ import json
 from django.contrib.auth.models import User
 from main.models import Post
 from django.urls import reverse
+from django.contrib.messages.views import SuccessMessageMixin
 import requests
 
 def loginUser(request):
@@ -52,7 +53,7 @@ def registerUser(request):
                 if register.is_valid():
                     register.save()
                     username = register.cleaned_data.get("username")
-                    messages.success(request,f"{username} Your Account Created Succesfully")
+                    messages.success(request,f"{username} Your Account Created Successfully")
                     return redirect("/login")
                 else:
                     messages.warning(request,f"{register.errors}")
@@ -77,8 +78,10 @@ def update_profile(request):
             if u_form.is_valid() and p_form.is_valid():
                 u_form.save()
                 p_form.save()
+                messages.success(request,"Profile Updated Succesfully")
                 return redirect(f"/profile/{request.user.pk}")
             else:
+                messages.warning(request,"Fill All The Fields Correctly")
                 return redirect("update_profile")
         else: 
             u_form = UserUpdateForm(instance = request.user)
@@ -145,6 +148,7 @@ class PostDetailview(View,LoginRequiredMixin):
             form = CommentForm()
             commentss = Comment.objects.filter(post=post)
             numberofcomments = len(commentss)
+            haha = Post.objects.filter(favourite = request.user)
             
 
             comments = Comment.objects.filter(post=post).order_by('-commented')
@@ -153,7 +157,8 @@ class PostDetailview(View,LoginRequiredMixin):
                 "form":form,
                 "post":post,
                 'comments':comments,
-                'numberofcomments':numberofcomments
+                'numberofcomments':numberofcomments,
+                'haha':haha
             }
 
             return render(request,"post_detail.html",context)
@@ -170,6 +175,7 @@ class PostDetailview(View,LoginRequiredMixin):
             new_comment.save()
             notification = Notifications(post = post,user = post.author,sender = new_comment.user)
             notification.save()
+            messages.success(request,"Answer Added Successfully")
             return redirect(f"/posts/{post.pk}")
         commentss = Comment.objects.all()
         numberofcomments = len(commentss)
@@ -186,22 +192,24 @@ class PostDetailview(View,LoginRequiredMixin):
         return render(request,"post_detail.html",context)
 
 
-class PostCreateView(LoginRequiredMixin,CreateView):
+class PostCreateView(SuccessMessageMixin,LoginRequiredMixin,CreateView):
     model = Post
     login_url = "/"
     fields = ["title","body"]
     template_name = "askquestion.html"
     success_url = reverse_lazy("home")
+    success_message = "Question Asked Successfully"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+class PostUpdateView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Post
     fields = ["title","body"]
     template_name = "askquestion.html"
     success_url = reverse_lazy("home")
+    success_message = "Question Updated Successfully"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -214,10 +222,11 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         return False
 
 
-class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+class PostDeleteView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Post
     success_url = reverse_lazy("home")
     template_name = "post_delete.html"
+    success_message = "Question Deleted Successfully"
 
     def test_func(self):
         post = self.get_object()
@@ -229,14 +238,14 @@ class AddFollower(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.add(request.user)
-
+        messages.success(request,f"You Follow {profile.user}")
         return redirect('profile', pk=profile.pk)
 
 class RemoveFollower(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         profile = Profile.objects.get(pk=pk)
         profile.followers.remove(request.user)
-
+        messages.success(request,f"You Unfollow {profile.user}")
         return redirect('profile', pk=profile.pk)
 
 class AddLikes(View):
@@ -251,6 +260,7 @@ class AddLikes(View):
                 break
 
         if isdisliked:
+            messages.success(request,"DisLike Removed Successfully")
             comment.dislikes.remove(request.user)
 
         isliked = False
@@ -261,8 +271,10 @@ class AddLikes(View):
                 break
 
         if not isliked:
+            messages.success(request,"Like Added Successfully")
             comment.likes.add(request.user)
         if isliked:
+            messages.success(request,"Like Removed Successfully")
             comment.likes.remove(request.user)
 
         likesoncommnet = comment.likes.count() - comment.dislikes.count()
@@ -284,6 +296,7 @@ class AddDislike(View):
                 break
 
         if isliked:
+            messages.success(request,"Like Removed Successfully")
             comment.likes.remove(request.user)
 
         isdisliked = False
@@ -294,8 +307,10 @@ class AddDislike(View):
                 break
 
         if not isdisliked:
+            messages.success(request,"DisLike Added Successfully")
             comment.dislikes.add(request.user)
         if isdisliked:
+            messages.success(request,"DisLike Removed Successfully")
             comment.dislikes.remove(request.user)
         
         likesoncommnet = comment.likes.count() - comment.dislikes.count()
@@ -316,8 +331,10 @@ class SavePost(View):
                 is_favourite = True
                 break
         if not is_favourite:
+            messages.success(request,"Post Saved Successfully")
             post.favourite.add(request.user)
         if is_favourite:
+            messages.success(request,"Post UnSaved Successfully")
             post.favourite.remove(request.user)
         return redirect(f'/posts/{post.pk}')
 
