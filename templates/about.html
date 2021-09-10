@@ -8,11 +8,135 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" 
     crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/1de76f1dd3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title>About Us</title>
   </head>
-  <body>
+  <body style="overflow-x: hidden;">
+
+    <header class="navbarr">
+      <div class="logo">
+          <a href="{% url 'home' %}"><img src="{% static 'images/logoboi.PNG' %}" class="mylogogpbrr" alt="" width="148px" height="47px" style="cursor: pointer;position: relative;left: 30px;"></a>
+      </div>
+      <div class="searchdiv">
+          <i class="fas fa-search"></i>
+          <input type="search" class="searchh" placeholder="Search...">
+      </div>
+      <div class="iconsdivuser">
+          <a href="{% url 'ask_question' %}"><i class="fas fa-plus" data-bs-toggle="tooltip" title = "Ask Questions"></i></a>      
+          <a href="{% url 'notifications' %}"><i class="fas fa-bell" data-bs-toggle="tooltip" title="Notifications"></i></a>
+          <a href="{% url 'saveposts' %}"><i class="fas fa-save" data-bs-toggle="tooltip" title = "Saved Posts"></i></a>
+          <a href="{% url 'reddemcoins' %}"><i class="fas fa-gift" data-bs-toggle="tooltip" title = "Redeem Coins"></i></a>
+      </div>
+      <div class="userdiv">
+          <img src="{{user.profile.image.url}}" data-bs-toggle="tooltip" title = "{{request.user}}" width="39px" height="39px" class="userprofilebruh">
+          <i class="fas fa-angle-down" onclick="usernav()"></i>
+          <div class="divofuserthings" id = "navbar-user">
+              <a href="{% url 'profile' user.pk %}" target="_blank" onclick="usernav()">
+                  <div class="upperpart">
+                          <img src="{{request.user.profile.image.url}}" alt="">
+                          <h3>{{request.user}}</h3>
+                          <i class="fas fa-chevron-right"></i>
+                          <hr>
+                  </div>
+              </a>
+              <div class="middlepart">
+                  <div class="askquestions" data-bs-toggle="modal" data-bs-target="#postcreate" onclick="usernav()">
+                      <a href="{% url 'ask_question' %}" style="color: black !important;">
+                          <i class="fas fa-question"></i>
+                          <p style="position: relative;bottom: 30px;left: 10px;">Ask Questions</p>
+                      </a>
+                  </div>
+                  <div class="coinsthing">
+                      <a href="{% url 'notifications' %}" style="color: black !important;">
+                          <i class="fas fa-bell"></i>
+                          <p style="position: relative;bottom: 30px;left: 10px;">Notifications</p>
+                      </a>
+                  </div>
+                  <div class="yourcontent">
+                      <a href="{% url 'reddemcoins' %}" style="color: black !important;">
+                          <i class="fas fa-gift"></i>
+                          <p style="position: relative;bottom: 30px;left: 10px;">Redeem Coins</p>
+                      </a>
+                  </div>
+                  <div class="leaderboard">
+                      <a href="{% url 'saveposts' %}" style="color: black !important;">
+                          <i class="fas fa-save"></i>
+                          <p style="position: relative;bottom: 30px;left: 10px;">Saved Posts</p>
+                      </a>
+                  </div>
+                  <hr>
+              </div>
+              <div class="lastpart">
+                  <div class="contact">
+                      <p data-bs-toggle="modal" data-bs-target="#contact" onclick="usernav()">Contact Us</p>
+                  </div>
+                  <div class="about">
+                      <a href="{% url 'about' %}">
+                      <p onclick="usernav()">About Us</p>
+                      </a>
+                  </div>
+                  <div class="logout">
+                      <p><a href="/logout" style="color: black !important;">Logout</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+
+  <div class="modal fade modal-divbruh" id="contact" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form action="" method="POST">
+              {% csrf_token %}
+              <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Contact Form :)</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="mb-3">
+                      <label for="formGroupExampleInput" class="form-label">Your Name</label>
+                      <input type="text" name = "name" class="form-control" id="formGroupExampleInput" placeholder="Enter your Name" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="formGroupExampleInput2" class="form-label">Your Email</label>
+                      <input type="email" name = "email" class="form-control" id="formGroupExampleInput2" placeholder="Enter your Email" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="formGroupExampleInput2" class="form-label">Describe what you want to contact us for here</label>
+                      <textarea class="form-control" name = "message" id="exampleFormControlTextarea1" rows="3" placeholder="Your message" onkeyup="bot()" required></textarea>
+                  </div>
+              </div>
+              <div class="modal-footer">
+              <button type="submit" class="modalbtn" id = "buttonmodal" disabled>Submit</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+        function usernav(){
+            if (document.getElementById("navbar-user").style.display == "none"){
+              document.getElementById("navbar-user").style.display = "block"
+            }
+            else{
+              document.getElementById("navbar-user").style.display = "none"
+            }
+        }
+
+        function bot(){
+              if (document.getElementById("exampleFormControlTextarea1").value.length <= 15){
+                  document.getElementById("buttonmodal").disabled = true
+              }
+              else if (document.getElementById("exampleFormControlTextarea1").value.length >= 15){
+                  document.getElementById("buttonmodal").disabled = false
+              }
+          }
+
+    </script>
     
     <div class="picturestuff" style="overflow-x: hidden;">
         <div class="divofabouttop" style="background-color: #ffffff;height: 450px;width: 790px;position: absolute;left: 250px;top: 100px;opacity: 0.9;">
@@ -22,17 +146,34 @@
         </div>
     </div>
 
-    <div id="carouselExampleCaptions" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 800px;position: relative;left: 280px;border: 1px solid #dee0e1;
+    <div class="idkokbrobye" style="background-color: white;border: 1px solid #dee0e1;
     border-radius: 3px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
+    width:90%;height: auto;margin-left: 80px;
+    margin-top: 40px;">
+      <p style="font-size: 34px;text-align: center;font-weight: bold;margin-top: 17px;font-family: 'Poppins','Source Sans Pro','sans-serif';">Story Behind Hale&Hearty</p>
+      <p style="font-size: 18px;font-weight: 500;margin-top: 35px;font-family: 'Poppins','Source Sans Pro','sans-serif';padding: 5px 96px;">Story Behind Hale&Hearty The vision of Hale&Hearty is to build healthy communities around the globe.
+        We help you connect to the right people for your health related queries - be it meditation, diet, gyming, medication, emotional well-being, mindfulness, covid-19 or other medical conditions etc.
+        </p>
+    </div>
+
+    <div style="background-color: #efded4; height: 422px;margin-bottom: 40px;">
+
+      <p style="position: absolute;font-size: 43px;font-family: 'Poppins','Source Sans Pro','sans-serif';margin-top: 110px;font-weight: bold;width: 40px;margin-left: 65px;">Features And Functionalities</p>
+
+    <div id="carouselExampleCaptions" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 800px;position: relative;left: 280px;border: 1px solid #dee0e1;
+    border-radius: 3px;margin-left: 190px;
     box-shadow: 0 1px 1px rgb(0 0 0 / 4%);margin-bottom: 200px;margin-top: 50px;">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
         </div>
         <div class="carousel-inner" style="height: 420px;">
           <div class="carousel-item active">
-            <img src="{% static 'images/profile.PNG' %}" width="509px" height="409px" class="d-block w-100" alt="...">
+            <img src="{% static 'images/question.PNG' %}" width="509px" height="409px" class="d-block w-100" alt="...">
             <!-- <div class="carousel-caption d-none d-md-block" style="position: fixed;bottom: 90px;">
               <h5>First slide label</h5>
               <p>Some representative placeholder content for the first slide.</p>
@@ -46,7 +187,21 @@
             </div> -->
           </div>
           <div class="carousel-item">
+            <img src="{% static 'images/profile.PNG' %}" width="509px" height="409px" class="d-block w-100" alt="...">
+            <!-- <div class="carousel-caption d-none d-md-block" style="position: fixed;bottom: 90px;">
+              <h5>Second slide label</h5>
+              <p>Some representative placeholder content for the second slide.</p>
+            </div> -->
+          </div>
+          <div class="carousel-item">
             <img src="{% static 'images/redeem1.PNG' %}" width="509px" height="409px" class="d-block w-100" alt="...">
+            <!-- <div class="carousel-caption d-none d-md-block" style="position: fixed;bottom: 90px;">
+              <h5>Third slide label</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div> -->
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/redeem2.PNG' %}" width="509px" height="409px" class="d-block w-100" alt="...">
             <!-- <div class="carousel-caption d-none d-md-block" style="position: fixed;bottom: 90px;">
               <h5>Third slide label</h5>
               <p>Some representative placeholder content for the third slide.</p>
@@ -63,6 +218,13 @@
         </button>
       </div>
 
+    </div>
+    <a href="https://github.com/VarunLanjhara" style="color: black !important;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16" style="cursor: pointer;margin-left: 700;margin-bottom: 7px;">  
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+    </svg>
+    </a>
+
       <!-- <style>
           .carousel-inner > .item {
              height: 800px;
@@ -70,6 +232,36 @@
       </style> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <div class="preloader">
+    
+      <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ripple" style="background:0 0"><circle cx="50" cy="50" r="4.719" fill="none" stroke="#1d3f72" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="-1.5s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="-1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="27.591" fill="none" stroke="#5699d2" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="0s" repeatCount="indefinite"/></circle></svg>
+      
+    </div>
+
+      <style>
+          .preloader {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              width: 100%;
+              background: rgb(23, 22, 22);
+              position: fixed;
+              top: 0;
+              left: 0;
+              z-index: 9999;
+              transition: opacity 0.3s linear;
+          }
+      </style>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script>
+      $(window).load(function() {
+      $(".preloader").delay(1000).fadeOut("slow");
+      // $("#overlayer").delay(5000).fadeOut("slow");
+      })
+  </script>
 
   </body>
 </html>
