@@ -29,10 +29,12 @@
         <div class="logo">
             <a href="{% url 'home' %}"><img src="{% static 'images/logoboi.PNG' %}" class="mylogogpbrr" alt="" width="148px" height="47px" style="cursor: pointer;position: relative;left: 30px;"></a>
         </div>
-        <div class="searchdiv">
-            <i class="fas fa-search"></i>
-            <input type="search" class="searchh" placeholder="Search...">
-        </div>
+        <form action="/search" method="get">
+            <div class="searchdiv">
+                <i class="fas fa-search"></i>
+                <input type="search" class="searchh" placeholder="Search..." name = "h" id = "h">
+            </div>
+        </form>
         <div class="iconsdivuser">
             <a href="{% url 'ask_question' %}"><i class="fas fa-plus" data-bs-toggle="tooltip" title = "Ask Questions"></i></a>      
             <a href="{% url 'notifications' %}"><i class="fas fa-bell" data-bs-toggle="tooltip" title="Notifications"></i></a>

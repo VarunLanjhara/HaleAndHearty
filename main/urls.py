@@ -25,5 +25,6 @@ urlpatterns = [
     path("savedposts/",views.favouratelist,name = "saveposts"),
     path('notifications/',views.notificationstuff,name = "notifications"),
     path('redeem/',views.reddemcoins,name = "reddemcoins"),
-    path('aboutus/',views.about,name = "about")
+    path('aboutus/',views.about,name = "about"),
+    path('search/',views.search,name = "search")
 ]

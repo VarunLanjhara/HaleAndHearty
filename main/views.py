@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.db.models import query
 from django.urls.base import reverse_lazy
 from main.forms import CommentForm, RegisterForm
 from django.http.response import HttpResponse, HttpResponseRedirect
@@ -367,4 +368,9 @@ def about(request):
         return redirect("/#about")
 
 def search(request):
-    return HttpResponse("Bhv")
+    query = request.GET["h"]
+    posts = Post.objects.filter(body__icontains = query)
+    posts2 = Post.objects.filter(title__icontains = query)
+    posts3 = Post.objects.filter(author__username__icontains = query)
+    postshaha = posts.union(posts2,posts3)
+    return render(request,"search.html",{"posts":posts,"posthaha":postshaha,'query':query})
