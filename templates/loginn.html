@@ -36,10 +36,13 @@
             <input type="password" class="pass-key" required placeholder="Password" name = "password">
             <span class="show">SHOW</span>
           </div>
-          <div class="pass">
-            <a href="{% url 'password_reset' %}">Forgot Password?</a>
+          <div class="form-check" style="margin-top: 20px;">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked style="cursor: pointer;">
+            <label class="form-check-label" for="flexCheckDefault" style="color: #fff;font-size: 19px;position: relative;left: -80px;bottom: 4px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+              Remember Me
+            </label>
           </div>
-          <div class="field">
+          <div class="field" style="margin-top: 20px;">
             <input type="submit" value="Login">
           </div>
         </form>

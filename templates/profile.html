@@ -239,8 +239,11 @@
                         </div>
                     </a>
                     {% if request.user == post.author %}
-                        <i class="fas fa-ellipsis-h"></i>
-                    {% endif %}
+                    <div>
+                        <a href="{% url 'post_update' post.pk %}" style="color: black !important;"><i class="far fa-edit" style="margin-left: 20px;margin-top: 7px;" data-bs-toggle="tooltip" title="Edit"></i></a>
+                        <a href="{% url 'post_delete' post.pk %}" style="color: black !important;"><i class="far fa-trash-alt" style="margin-left: 40px;margin-top: 7px;" data-bs-toggle="tooltip" title="Delete"></i></a>
+                    </div>
+                {% endif %}
                 </div>
           </div>
         {% endif %}
