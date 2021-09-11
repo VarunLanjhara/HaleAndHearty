@@ -22,3 +22,6 @@ We help you connect to the right people for your health related queries - be it 
 <img src = "https://github.com/VarunLanjhara/HaleAndHearty/blob/master/main/static/images/profile.PNG" alt = "" width = "700px" height = "350px">
 <img src = "https://github.com/VarunLanjhara/HaleAndHearty/blob/master/main/static/images/redeem1.PNG" alt = "" width = "700px" height = "350px">
 <img src = "https://github.com/VarunLanjhara/HaleAndHearty/blob/master/main/static/images/redeem2.PNG" alt = "" width = "700px" height = "350px">
+
+## Creator
+Varun Lanjhara
