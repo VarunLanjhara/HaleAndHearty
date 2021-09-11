@@ -6,8 +6,9 @@ We help you connect to the right people for your health related queries - be it 
 ![Logo](https://halehearty.herokuapp.com/static/images/logoboi.PNG)
 
 ## Features And Functionalities
-
+```bash
 - Post a question and get notified whenever someone answers to your health query.
-- You could save, share or report health queries of others on Hale&Hearty community
-- Answer others' queries and earn reward coins on every upvote you secure from Hale&Hearty community.
-- You could redeem the coins that you secured with the upvotes(on your answers) from the Hale&Hearty community.
+- You could save, share or report health queries of others on Hale And Hearty community
+- Answer others queries and earn reward coins on every upvote you secure from Hale And Hearty community.
+- You could redeem the coins that you secured with the upvotes(on your answers) from the Hale And Hearty community.
+```
